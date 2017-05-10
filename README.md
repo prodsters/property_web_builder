@@ -18,7 +18,7 @@ Admin-End
 ---------
 - Adding of Templates. We will use the [AdminLTE Template](https://github.com/almasaeed2010/AdminLTE)
 - Authentication
-- Add/Edit/Delete Properties
+- Add/Edit/Delete Properties 
 - Dashboard/Statistics
 - Edit Site Contents: About, Contact, Privacy Policy, Terms, Socil Media Account Links
 - Edit Home Page Contents
