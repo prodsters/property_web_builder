@@ -11,6 +11,17 @@
 |
 */
 
+
+Route::group(['namespace' => "Admin", "prefix" => "admin"], function () {
+
+	Route::get("dashboard", "AdminDashboardController@index")->name("admin.dashboard.index");
+
+});
+
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('front.index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');

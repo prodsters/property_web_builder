@@ -43,6 +43,13 @@ Features IMPLEMENTED
 -  
 
 
+
+SETUP ERRORS/CONFIG
+====================
+If you are encountering errors during installation or setup you can read the SETUP_CONFIG.md file in the root of the application. It may contain the solution
+
+
+
 Sponsors
 ========
 
