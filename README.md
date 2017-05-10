@@ -1,14 +1,21 @@
-#Property Web Builder
+Property Web Builder
+====================
+
 This is a ready to use Laravel based web application for creating real estate websites.
 
-#Description
+Description
+============
+
 This is a real estate web application that agents and agencies can use to list available properties.
 
-#Technology Stack
+Technology Stack
+================
+
 - The application is based on *Laravel 5.4* 
 - The Backend uses [AdminLTE Template](https://github.com/almasaeed2010/AdminLTE)
 
-#Features TODOs
+Features TODOs
+==============
 
 Front-End
 ---------
@@ -30,21 +37,30 @@ Admin-End
 - Data Importing
 
 
-#Features IMPLEMENTED
-- 
+Features IMPLEMENTED
+====================
 
-#Sponsors
+-  
+
+
+Sponsors
+========
+
 Property Web Builder is proudly sponsored by
 
 - [Prodsters](https://prodsters.com) - A community of African talents capable of handling your outsourced projects
 
-#Contributions
+Contributions
+=============
+
 You can start by implementing features listed in the #TODO section above and create a pull request. 
 
 You can as well suggest a feature by opening an issue and we will start from there.
 
 
-#License
+License
+=======
+
 [MIT License](https://opensource.org/licenses/MIT)  
 
 
