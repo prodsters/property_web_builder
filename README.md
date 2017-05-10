@@ -4,6 +4,10 @@ This is a ready to use Laravel based web application for creating real estate we
 #Description
 This is a real estate web application that agents and agencies can use to list available properties.
 
+#Technology Stack
+- The application is based on *Laravel 5.4* 
+- The Backend uses [AdminLTE Template](https://github.com/almasaeed2010/AdminLTE)
+
 #Features TODOs
 
 Front-End
