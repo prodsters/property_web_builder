@@ -13,7 +13,7 @@ class CreatePropertyStateTable extends Migration
      */
     public function up()
     {
-        Schema::create('property_state', function (Blueprint $table) {
+        Schema::create('property_states', function (Blueprint $table) {
             $table->increments('id');
             $table->string('state');
             $table->timestamps();
@@ -28,6 +28,6 @@ class CreatePropertyStateTable extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists("property_state");
+        Schema::dropIfExists("property_states");
     }
 }

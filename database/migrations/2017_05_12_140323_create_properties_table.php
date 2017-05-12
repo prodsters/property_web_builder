@@ -16,21 +16,22 @@ class CreatePropertiesTable extends Migration
          Schema::create('properties', function (Blueprint $table) {
             
             $table->increments('id');
-            $table->int("bedroom_count");
-            $table->int("bathroom_count");
-            $table->int("garage_count");
-            $table->int("plot_area");
-            $table->int("constructed_area");
-            $table->string("area_unit");
-            $table->date("construction_year");
+            $table->integer("bedroom_count")->default(0);
+            $table->integer("bathroom_count")->default(0);
+            $table->integer("garage_count")->default(0);
+            $table->integer("plot_area");
+            $table->integer("constructed_area");
+            $table->string("area_unit")->default("m2");
             $table->string("reference_no")->nullable();
             $table->string("title");
             $table->text("description");
+            $table->boolean("is_featured")->default(false);
+            $table->boolean("is_public")->default(true);
             
-            $table->unsignedInt("currency_id");
-            $table->unsignedInt("type_id");
-            $table->unsignedInt("state_id");
-            $table->unsignedInt("user_id"); //the creator of the advert
+            $table->unsignedInteger("currency_id");
+            $table->unsignedInteger("type_id");
+            $table->unsignedInteger("state_id");
+            $table->unsignedInteger("user_id"); //the creator of the advert
             
             $table->boolean("sale");
             $table->double("original_selling_price");
@@ -41,16 +42,17 @@ class CreatePropertiesTable extends Migration
             $table->double("current_rental_price");
 
             $table->string("street_address");
-            $table->int("street_number");
+            $table->integer("street_number");
             $table->string("city");
             $table->string("region");
             $table->string("country");
             $table->string("postal_code");
-
             
             $table->timestamps();
 
         });
+
+
     }
 
     /**
@@ -60,6 +62,6 @@ class CreatePropertiesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists("properties");
     }
 }

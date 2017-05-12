@@ -12,9 +12,12 @@
 */
 
 
-Route::group(['namespace' => "Admin", "prefix" => "admin"], function () {
+Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["auth"] ], function () {
 
 	Route::get("dashboard", "AdminDashboardController@index")->name("admin.dashboard.index");
+
+	//properties
+	Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
 
 });
 

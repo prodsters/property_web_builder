@@ -26,7 +26,7 @@
           </a>
         </li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('admin.property.add')}}">
             <i class="fa fa-plus-square"></i> <span>Add Property</span>
           </a>
         </li>

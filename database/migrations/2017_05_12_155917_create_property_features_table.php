@@ -15,9 +15,14 @@ class CreatePropertyFeaturesTable extends Migration
     {
         Schema::create('property_features', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInt('feature_id');
-            $table->unsignedInt('property_id');
+            $table->unsignedInteger('feature_id');
+            $table->unsignedInteger('property_id');
             $table->timestamps();
+
+            $table->foreign('property_id')
+                ->references('id')->on('properties')
+                ->onDelete('cascade') //this will delete every property_features associated with the deleted property
+                ->onUpdate('cascade'); //this will update the reference here as well if the property id changes
         });
     }
 
@@ -28,6 +33,6 @@ class CreatePropertyFeaturesTable extends Migration
      */
     public function down()
     {
-        Schema:dropIfExists("property_features");
+        Schema::dropIfExists("property_features");
     }
 }
