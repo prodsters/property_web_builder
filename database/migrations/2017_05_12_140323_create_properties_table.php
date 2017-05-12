@@ -19,8 +19,8 @@ class CreatePropertiesTable extends Migration
             $table->integer("bedroom_count")->default(0);
             $table->integer("bathroom_count")->default(0);
             $table->integer("garage_count")->default(0);
-            $table->integer("plot_area");
-            $table->integer("constructed_area");
+            $table->integer("plot_area")->nullable();
+            $table->integer("constructed_area")->nullable();
             $table->string("area_unit")->default("m2");
             $table->string("reference_no")->nullable();
             $table->string("title");
@@ -42,9 +42,9 @@ class CreatePropertiesTable extends Migration
             $table->double("current_rental_price");
 
             $table->string("street_address");
-            $table->integer("street_number");
+            $table->integer("street_number")->nullable();
             $table->string("city");
-            $table->string("region");
+            $table->string("region")->nullable();
             $table->string("country");
             $table->string("postal_code");
             

@@ -12,7 +12,8 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{{asset('assets/admin/plugins/iCheck/square/blue.css')}}">
   <!-- page styles -->
    @yield("page:styles")
 
@@ -223,6 +224,9 @@
 <script src="{{asset('assets/admin/plugins/fastclick/fastclick.js')}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset('assets/admin/js/app.js')}}"></script>
+<!-- iCheck -->
+<script src="{{asset('assets/admin/plugins/iCheck/icheck.min.js')}}"></script>
+
 
 @yield("page:scripts")
 
