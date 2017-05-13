@@ -19,6 +19,8 @@
       @include("partials.alerts")
     </section>
 
+    <form role="form" method="POST" action="{{route('admin.property.add')}}">
+      {{csrf_field()}}
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -31,7 +33,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form role="form">
+            <!-- <form role="form"> -->
               <div class="box-body">
                 <div class="form-group">
                   <label for="title">Title</label>
@@ -44,34 +46,37 @@
                 <div class="form-group">
                   <label for="type_id">Property Type</label>
                   <select class="form-control" name="type_id">
-                    <option value="1">Flat</option>
+                    @foreach($types as $type)
+                    <option value="{{$type->id}}">{{$type->type}}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="form-group">
                   <label for="state_id">Property State</label>
                   <select class="form-control" name="state_id">
-                    <option value="1">New</option>
+                    @foreach($states as $state)
+                    <option value="{{$state->id}}">{{$state->state}}</option>
+                    @endforeach
                   </select>
                 </div>
                 <hr>
-
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="bedroom_count">Bedrooms</label>
-                      <input type="number" class="form-control" id="bedroom_count" name="bedroom_count" value="0"required >
+                      <input type="number" min="0" class="form-control" id="bedroom_count" name="bedroom_count" value="0"required >
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="bathroom_count">Bathrooms</label>
-                      <input type="number" class="form-control" id="bathroom_count" name="bathroom_count" value="0"required >
+                      <input type="number" min="0" class="form-control" id="bathroom_count" name="bathroom_count" value="0"required >
                     </div>
                   </div>
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="garage_count">Garages</label>
-                      <input type="number" class="form-control" id="garage_count" name="garage_count" value="0"required >
+                      <input type="number" min="0" class="form-control" id="garage_count" name="garage_count" value="0"required >
                     </div>
                   </div>
                 </div>
@@ -80,13 +85,13 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="plot_area">Plot Area</label>
-                      <input type="number" class="form-control" id="plot_area" name="plot_area" value="0" required >
+                      <input type="number" min="0" class="form-control" id="plot_area" name="plot_area" value="0" required >
                     </div>
                   </div>
                    <div class="col-sm-4">
                     <div class="form-group">
                       <label for="construction_area">Construction Area</label>
-                      <input type="number" class="form-control" id="construction_area" name="construction_area" value="0" required >
+                      <input type="number" min="0" class="form-control" id="construction_area" name="construction_area" value="0" required >
                     </div>
                   </div>
                    <div class="col-sm-4">
@@ -101,14 +106,8 @@
                 </div>
               </div>
               <!-- /.box-body -->
-
-              <div class="box-footer">
-               <!--  <button type="submit" class="btn btn-primary">Submit</button> -->
-              </div>
-            </form>
           </div>
           <!-- /.box -->
-
         </div>
         <!--/.col (left) -->
         
@@ -121,7 +120,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form class="">
+            <!-- <form class=""> -->
               <div class="box-body">
                 <div class="form-group">
                   <label for="reference_no">Reference No</label>
@@ -153,7 +152,7 @@
                   <div class="col-sm-3">
                     <div class="checkbox icheck">
                       <label>
-                        <input type="checkbox" name="is_public"> Public
+                        <input type="checkbox" name="is_public" checked> Public
                       </label>
                     </div>
                   </div>
@@ -161,31 +160,33 @@
                 <br>
                 <div class="form-group">
                   <label for="current_selling_price">Current Selling Price</label>
-                  <input type="number" class="form-control" id="current_selling_price" name="current_selling_price">
+                  <input type="number" min="0" class="form-control" id="current_selling_price" name="current_selling_price">
                 </div>
                 <div class="form-group">
                   <label for="original_selling_price">Original Selling Price</label>
-                  <input type="number" class="form-control" id="original_selling_price" name="original_selling_price" >
+                  <input type="number" min="0" class="form-control" id="original_selling_price" name="original_selling_price" >
                 </div>
                 <div class="form-group">
                   <label for="current_rental_price">Current Rental Price</label>
-                  <input type="number" class="form-control" id="current_rental_price" name="current_rental_price" >
+                  <input type="number" min="0" class="form-control" id="current_rental_price" name="current_rental_price" >
                 </div>
                 <div class="form-group">
                   <label for="original_rental_price">Original Rental Price</label>
-                  <input type="number" class="form-control" id="original_rental_price" name="original_rental_price">
+                  <input type="number" min="0" class="form-control" id="original_rental_price" name="original_rental_price">
                 </div>
                 <div class="form-group">
                   <label for="currency_id">Currency</label>
-                  <select class="form-control" name="currency_id">
-                    <option value="1">US Dollars</option>
+                  <select class="form-control" name="currency_id" required>
+                    @foreach($currencies as $currency)
+                    <option value="{{$currency->id}}">{{$currency->name}}  (<span>{!!$currency->symbol!!}</span>)</option>
+                    @endforeach
                   </select>
                 </div>
 
                 <br>
               </div>
               <!-- /.box-body -->
-            </form>
+            <!-- </form> -->
           </div>
           <!-- /.box -->
           <!-- /.box -->
@@ -207,7 +208,7 @@
                     </div>
                     <div class="form-group">
                       <label for="street_number">Street Number</label>
-                      <input type="number" class="form-control" id="street_number" name="street_number">
+                      <input type="number" min="0" class="form-control" id="street_number" name="street_number" value="0">
                     </div>
                     <div class="row">
                       <div class="col-sm-6">
@@ -246,20 +247,15 @@
             <!-- Form Element sizes -->
               <div class="box box-danger">
                 <div class="box-header with-border">
-                  <h3 class="box-title">4. Property Features</h3>
+                  <h3 class="box-title">Pick Location from Map</h3>
                 </div>
                 <div class="box-body">
                     <div class="form-group">
                       <label for="street_address">Features (You can add more than one)</label>
-                      <select class="form-control" multiple id="features" name="features">
-                        <option>Private Pool</option>
-                        <option>Independent Toiiled</option>
-                      </select>
+                      <input type="text" class="form-control" placeholder="search map">
                     </div>
                     <div class="form-group">
-                      <label for="photos">Upload Photos</label>
-                      <input type="file" id="photos">
-                      <p class="help-block">Click here to upload one or more photos</p>
+                      <p class="help-block">Map View</p>
                     </div>  
                 </div>
                 <!-- /.box-body -->
@@ -271,13 +267,10 @@
           <div class="col-sm-offset-3 col-sm-6">
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">5. Finalize</h3>
-                </div>
-                <div class="box-body">
-                    
+                  <h3 class="box-title">Finalize</h3>
                 </div>
                 <!-- /.box-body -->
-                <div class="box-footer">
+                <div class="box-footer text-center">
                   <button type="submit" class="btn btn-success btn-lg">Create Property Profile</button>
                 </div>
               </div>
@@ -286,6 +279,8 @@
       </div>
     </section>
     <!-- /.content -->
+
+    </form>
   </div>
   <!-- /.content-wrapper -->
 

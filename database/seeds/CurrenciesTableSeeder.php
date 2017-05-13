@@ -12,9 +12,9 @@ class CurrenciesTableSeeder extends Seeder
     public function run()
     {
          DB::table("currencies")->insert([
-           ["name" => "US Dollar", "symbol" => "$"],
-           ["name" => "Nigerian Naira", "symbol" => "#"],
-           ["name" => "GB Pounds Sterlin", "symbol" => "#"]
+           ["name" => "US Dollar", "symbol" => "&#36;"],
+           ["name" => "Nigerian Naira", "symbol" => "&#8358;"],
+           ["name" => "Euro", "symbol" => "&#8364;"]
         ]);
     }
 }

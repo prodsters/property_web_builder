@@ -18,6 +18,7 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 
 	//properties
 	Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
+	Route::match(["GET", "POST"], "property/add/features", "AdminPropertyController@addFeatures")->name("admin.property.add.features");
 
 });
 
