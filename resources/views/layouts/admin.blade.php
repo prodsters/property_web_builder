@@ -15,6 +15,9 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/iCheck/square/blue.css')}}">
   <!-- page styles -->
+  <!-- sweetalert -->
+   <link rel="stylesheet" href="{{asset('assets/css/sweetalert.css')}}">
+   <link rel="stylesheet" href="{{asset('assets/css/sweet-alert-animations.min.css')}}">
    @yield("page:styles")
 
 
@@ -24,7 +27,10 @@
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('assets/admin/css/skins/_all-skins.css')}}">
 
- 
+ <script type="text/javascript">
+   var token = "{{$csrf_token()}}";
+   var baseUrl = "{{url(/)}}";
+ </script>
   
 </head>
 <body class="hold-transition skin-purple-light sidebar-mini">
@@ -226,7 +232,8 @@
 <script src="{{asset('assets/admin/js/app.js')}}"></script>
 <!-- iCheck -->
 <script src="{{asset('assets/admin/plugins/iCheck/icheck.min.js')}}"></script>
-
+<!-- sweet alert -->
+<script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
 
 @yield("page:scripts")
 

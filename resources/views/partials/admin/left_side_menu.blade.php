@@ -21,7 +21,7 @@
         </li>
         <li class="header">PROPERTIES</li>
         <li class="treeview">
-          <a href="#">
+          <a href="{{route('admin.property.index')}}">
             <i class="fa fa-home"></i> <span>Properties</span>
           </a>
         </li>

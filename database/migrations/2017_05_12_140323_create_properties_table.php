@@ -20,7 +20,7 @@ class CreatePropertiesTable extends Migration
             $table->integer("bathroom_count")->default(0);
             $table->integer("garage_count")->default(0);
             $table->integer("plot_area")->nullable();
-            $table->integer("constructed_area")->nullable();
+            $table->integer("construction_area")->nullable();
             $table->string("area_unit")->default("m2");
             $table->string("reference_no")->nullable();
             $table->string("title");
@@ -33,15 +33,15 @@ class CreatePropertiesTable extends Migration
             $table->unsignedInteger("state_id");
             $table->unsignedInteger("user_id"); //the creator of the advert
             
-            $table->boolean("sale");
-            $table->double("original_selling_price");
-            $table->double("current_selling_price");
+            $table->boolean("sale")->nullable();
+            $table->double("original_selling_price")->nullable();
+            $table->double("current_selling_price")->nullable();
 
-            $table->boolean("rental");
-            $table->double("original_rental_price");
-            $table->double("current_rental_price");
+            $table->boolean("rental")->nullable();
+            $table->double("original_rental_price")->nullable();
+            $table->double("current_rental_price")->nullable();
 
-            $table->string("street_address");
+            $table->text("street_address");
             $table->integer("street_number")->nullable();
             $table->string("city");
             $table->string("region")->nullable();

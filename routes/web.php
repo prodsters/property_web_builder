@@ -17,8 +17,12 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	Route::get("dashboard", "AdminDashboardController@index")->name("admin.dashboard.index");
 
 	//properties
+	Route::get("/properties", "AdminPropertyController@index")->name("admin.property.index");
 	Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
-	Route::match(["GET", "POST"], "property/add/features", "AdminPropertyController@addFeatures")->name("admin.property.add.features");
+	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
+	//for uploading image
+	Route::get("/property/upload/image", "AdminPropertyController@handleUpload")->name("admin.property.upload");
+
 
 });
 

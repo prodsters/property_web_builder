@@ -19,7 +19,7 @@
       @include("partials.alerts")
     </section>
 
-    <form role="form" method="POST" action="{{route('admin.property.add')}}">
+    <form role="form" id="addProperty" method="POST" action="{{route('admin.property.add')}}">
       {{csrf_field()}}
     <!-- Main content -->
     <section class="content">
@@ -37,11 +37,11 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" class="form-control" id="title" name="title" placeholder="Example Bungalow" required>
+                  <input type="text" max="240" class="form-control" id="title" name="title" placeholder="Example Bungalow" required>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
-                  <textarea style="resize:resize-y;" class="form-control" rows="5" name="description" required placeholder="This is where you describe the property succintly"></textarea>
+                  <textarea max="300" style="resize:resize-y;" class="form-control" rows="5" name="description" required placeholder="This is where you describe the property succintly"></textarea>
                 </div>
                 <div class="form-group">
                   <label for="type_id">Property Type</label>
@@ -114,7 +114,7 @@
         <!-- right column -->
         <div class="col-md-6">
           <!-- Horizontal Form -->
-          <div class="box box-info">
+          <div class="box box-info" id="pricing-info-box">
             <div class="box-header with-border">
               <h3 class="box-title">2. Pricing Info</h3>
             </div>
@@ -122,10 +122,6 @@
             <!-- form start -->
             <!-- <form class=""> -->
               <div class="box-body">
-                <div class="form-group">
-                  <label for="reference_no">Reference No</label>
-                  <input type="text" class="form-control" id="reference_no" name="reference_no" placeholder="Optional, Leave blank if none">
-                </div>
 
                 <div class="row">
                   <div class="col-sm-3">
@@ -138,7 +134,7 @@
                   <div class="col-sm-3">
                     <div class="checkbox icheck">
                       <label>
-                        <input type="checkbox" name="rental" checked> For Rent
+                        <input type="checkbox" name="rental"> For Rent
                       </label>
                     </div>
                   </div>
@@ -152,28 +148,32 @@
                   <div class="col-sm-3">
                     <div class="checkbox icheck">
                       <label>
-                        <input type="checkbox" name="is_public" checked> Public
+                        <input type="checkbox" name="is_public" checked> Show on Site
                       </label>
                     </div>
                   </div>
                 </div>
                 <br>
-                <div class="form-group">
-                  <label for="current_selling_price">Current Selling Price</label>
-                  <input type="number" min="0" class="form-control" id="current_selling_price" name="current_selling_price">
+                <div id="selling_price" style="display: none;">
+                  <div class="form-group">
+                    <label for="current_selling_price">Current Selling Price</label>
+                    <input type="number" min="0" class="form-control" id="current_selling_price" name="current_selling_price">
+                  </div>
+                  <div class="form-group">
+                    <label for="original_selling_price">Original Selling Price</label>
+                    <input type="number" min="0" class="form-control" id="original_selling_price" name="original_selling_price" >
+                  </div>
                 </div>
-                <div class="form-group">
-                  <label for="original_selling_price">Original Selling Price</label>
-                  <input type="number" min="0" class="form-control" id="original_selling_price" name="original_selling_price" >
-                </div>
-                <div class="form-group">
-                  <label for="current_rental_price">Current Rental Price</label>
-                  <input type="number" min="0" class="form-control" id="current_rental_price" name="current_rental_price" >
-                </div>
-                <div class="form-group">
-                  <label for="original_rental_price">Original Rental Price</label>
-                  <input type="number" min="0" class="form-control" id="original_rental_price" name="original_rental_price">
-                </div>
+                <div id="rental_price" style="display: none;">  
+                  <div class="form-group">
+                    <label for="current_rental_price">Current Rental Price</label>
+                    <input type="number" min="0" class="form-control" id="current_rental_price" name="current_rental_price" >
+                  </div>
+                  <div class="form-group">
+                    <label for="original_rental_price">Original Rental Price</label>
+                    <input type="number" min="0" class="form-control" id="original_rental_price" name="original_rental_price">
+                  </div>
+                </div>  
                 <div class="form-group">
                   <label for="currency_id">Currency</label>
                   <select class="form-control" name="currency_id" required>
@@ -204,7 +204,7 @@
                 <div class="box-body">
                     <div class="form-group">
                       <label for="street_address">Street Address</label>
-                      <input type="text" class="form-control" id="street_address" name="street_address" required>
+                      <textarea class="form-control" id="street_address" name="street_address" rows="5" required></textarea>
                     </div>
                     <div class="form-group">
                       <label for="street_number">Street Number</label>
@@ -289,11 +289,71 @@
 
 <script>
   $(function () {
+
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',
       // increaseArea: '20%' // optional
     });
+
+    $("input[name='sale']").on('ifChanged', function(event) {
+       if(event.target.checked) {
+          $("#selling_price").show("slow");
+       } else {
+           $("#selling_price").hide("fast");
+       }
+    });
+
+    $("input[name='rental']").on('ifChanged', function(event) {
+       if(event.target.checked) {
+          $("#rental_price").show("slow");
+       } else {
+           $("#rental_price").hide("fast");
+       }
+    });
+
+    $("#addProperty").on("submit", function(event) {
+        event.preventDefault();
+
+        if(!$("input[name='sale']").is(":checked") && !$("input[name='rental']").is(":checked")) {
+           showErrorAndNavigate("You have not specify either this property is for sale or rental", "#pricing-info-box"); 
+           return false; 
+        }
+
+        if( $("input[name='sale']").is(":checked") && !$("#current_selling_price").val() && !$("#original_selling_price").val()) {
+           showErrorAndNavigate("Current and Original Selling Price can not be zero though they can be the same", "#pricing-info-box"); 
+           return false; 
+        }
+         if( $("input[name='rental']").is(":checked") && !$("#current_rental_price").val() && !$("#original_rental_price").val()) {
+           showErrorAndNavigate("Current and Original Rental Price can not be zero though they can be the same", "#pricing-info-box"); 
+           return false; 
+        }
+
+        document.getElementById("addProperty").submit();
+        
+    });
+
+
   });
+
+  function showErrorAndNavigate(message, selector) {
+    //message to show
+    //selector to navigate to
+        swal({
+                title: "Error",
+                text: ""+message,
+                type: "error",
+                showCancelButton: false,
+                confirmButtonText: "OK",
+                showConfirmButton: true,
+                closeOnConfirm: false
+              },
+              function(){
+                swal.close();
+                $(document.body).animate({
+                  'scrollTop':   $(''+selector).offset().top
+                  }, 300);
+              });
+  }
 </script>
 @endsection
