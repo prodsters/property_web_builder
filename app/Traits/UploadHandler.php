@@ -5,7 +5,7 @@ use Input;
 use Log;
 use Storage;
 use Image;
-use App\Beans\Constants;
+
 
 trait UploadHandler {
 
@@ -25,8 +25,7 @@ trait UploadHandler {
 
 		// Log::info("handleUpload called ". json_encode(Input::all()));              
 
-		if(Input::hasFile('profilePic') && Input::file('profilePic')->isValid() )
-		{
+		
 			$file = Input::file('profilePic');
 			$extension = $file->getClientOriginalExtension(); 
 			$fileName = str_random(20) .'.'. $extension;
@@ -37,9 +36,6 @@ trait UploadHandler {
 
 			Self::processAvatar($fileName);
 			return $fileName;
-		}
-
-		return Constants::DEFAULT_PROFILE_PIC_URL;
 	}
 
 

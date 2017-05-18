@@ -14,6 +14,7 @@ use App\Models\Feature;
 use App\Models\Photo;
 use Input;
 use Auth;
+use Storage; 
 
 class AdminPropertyController extends Controller
 {
@@ -120,9 +121,23 @@ class AdminPropertyController extends Controller
     }
 
 
-    public function handleUpload() {
+    public function handleUpload(Request $request) {
 
+        if(Input::hasFile('file') && Input::file('file')->isValid() )
+        {
+
+            $file = Input::file('file');
+            $extension = $file->getClientOriginalExtension(); 
+            $fileName = str_random(10) .'.'. $extension;
+            $clientMimeType = $file->getClientMimeType();
+
+            $original = config('image.profile.original.path') . $fileName;
+            \Storage::disk('public')->put( $original , file_get_contents( $file->getRealPath()) );
+
+            return response()->json([$original]);
+        }
         
-
+        return response()->json(["error" => "No File Selected"]);
     }
+        
 }

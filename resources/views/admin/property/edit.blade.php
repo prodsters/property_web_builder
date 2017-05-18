@@ -413,9 +413,11 @@
          console.log("changed = " + inputId);
          var files = document.getElementById("photos_" + inputId).files;
          if(files.length > 0) {
-           previewImage(files[files.length -1]);
+           uploadImage(files[0]);
+           // previewImage(files[files.length -1]);
          } else {
            previewImage(files[0]);
+           uploadImage(files[0]);
          }
        });
     });
@@ -475,7 +477,7 @@
       formData.append('file', file);
       formData.append("_token", token);
       $.ajax({
-          url: baseUrl + "/property/upload/image",
+          url: baseUrl + "admin/property/upload/image",
           method: "post",
           data: formData,
           processData: false,

@@ -16,7 +16,10 @@
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/iCheck/square/blue.css')}}">
   <!-- page styles -->
   <!-- sweetalert -->
-   <link rel="stylesheet" href="{{asset('assets/css/sweetalert.css')}}">
+  <link rel="stylesheet" href="{{asset('assets/css/sweetalert.css')}}">
+   <!-- blockUI -->
+  <link rel="stylesheet" href="{{asset('assets/css/blockui.min.css')}}">
+
    <link rel="stylesheet" href="{{asset('assets/css/sweet-alert-animations.min.css')}}">
    @yield("page:styles")
 
@@ -28,8 +31,8 @@
   <link rel="stylesheet" href="{{asset('assets/admin/css/skins/_all-skins.css')}}">
 
  <script type="text/javascript">
-   var token = "{{$csrf_token()}}";
-   var baseUrl = "{{url(/)}}";
+   var token = "{{csrf_token()}}";
+   var baseUrl = "{{url('/')}}";
  </script>
   
 </head>
@@ -234,7 +237,10 @@
 <script src="{{asset('assets/admin/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- sweet alert -->
 <script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
-
+<!-- blockUI -->
+<script src="{{asset('assets/js/jquery.blockUI.js')}}"></script>
+<!-- utility -->
+<script src="{{asset('assets/admin/js/utility.js')}}"></script>
 @yield("page:scripts")
 
 </body>
