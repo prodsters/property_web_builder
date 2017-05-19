@@ -121,8 +121,8 @@ class AdminPropertyController extends Controller
     }
 
 
-    public function handleUpload(Request $request) {
-
+    public function addPhoto(Request $request) {
+        
         if(Input::hasFile('file') && Input::file('file')->isValid() )
         {
 
@@ -134,10 +134,21 @@ class AdminPropertyController extends Controller
             $original = config('image.profile.original.path') . $fileName;
             \Storage::disk('public')->put( $original , file_get_contents( $file->getRealPath()) );
 
-            return response()->json([$original]);
+            return response()->json(["url" => $original], 200);
         }
         
-        return response()->json(["error" => "No File Selected"]);
+        return response()->json(["error" => "No File Selected"], 504);
+    }
+
+    public function deletePhoto(Request $request) {
+            Log::info($request->all());
+            if(is_null($request->image)) {
+                return response()-json(["error" => "No Image Specified"], 504);
+            }
+
+            Storage::delete($request->image);
+
+            return response()->json(["success" => "success"], 200);
     }
         
 }

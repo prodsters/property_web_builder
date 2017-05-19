@@ -19,11 +19,10 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	//properties
 	Route::get("/properties", "AdminPropertyController@index")->name("admin.property.index");
 	Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
+	Route::post("/property/image/add", "AdminPropertyController@addPhoto")->name("admin.property.upload");
+	Route::post("/property/image/delete", "AdminPropertyController@deletePhoto")->name("admin.property.delete.photo");
 	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
-	//for uploading image
-	Route::get("/property/upload/image", "AdminPropertyController@handleUpload")->name("admin.property.upload");
-
-
+	
 });
 
 Route::get('/', function () {

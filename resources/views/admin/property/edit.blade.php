@@ -406,19 +406,17 @@
 
     $("#addPhotoBt").on("click", function() {
       inputId = Math.floor(Math.random() * 2000);
-      console.log("idFile = " + inputId);
-       $("#photo-inputs").append('<input type="file" name="photos" id="photos_' + inputId + '" style="display: inherit;" />'); 
+      // console.log("idFile = " + inputId);
+       $("#photo-inputs").append('<input type="file" name="photos" id="photos_' + inputId + '" style="display: none;" />'); 
        $("#photos_" + inputId).trigger("click");
        $("#photos_" + inputId).on("change", function() {
-         console.log("changed = " + inputId);
-         var files = document.getElementById("photos_" + inputId).files;
-         if(files.length > 0) {
-           uploadImage(files[0]);
-           // previewImage(files[files.length -1]);
-         } else {
-           previewImage(files[0]);
-           uploadImage(files[0]);
-         }
+         // console.log("changed = " + inputId);
+         var file = document.getElementById("photos_" + inputId).files[0];
+         // if(files.length > 0) {
+           uploadImage(file);
+         // } else {
+           // uploadImage(files[0]);
+         // }
        });
     });
 
@@ -434,7 +432,7 @@
     });
   });
 
-  function previewImage(file) {
+  function verifyImage(file) {
 
     // console.log("previewImage called " + file);
 
@@ -470,14 +468,41 @@
          reader.readAsDataURL(file);
   }
 
-  function uploadImage(file) {
+  function previewImage(data) {
+
+     //count the number of columns created already 
+               colCount = $("[id^=col_]").length;
+
+              rowId = Math.floor(Math.random() * 50);
+
+              if(colCount <= 0 || (colCount % 3) == 0) { 
+                //create new row when there are 3 columns in the last row
+               console.log("create new row");
+                var output = '<div class="row" id="row_' + rowId + '"> <div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /><button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div> </div>';
+                // console.log("generated div = " + output);
+                $("#photo-box-body").append(output);
+              } else {
+                console.log("append column");
+                //append to the last row created
+                var output = '<div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /> <button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div>';
+                // console.log(" generated div = " + output);
+                var divL = $("[id^=row_]").length;
+                console.log("divL == " + divL);
+                $("[id^=row_]:last-child").append(output);
+                console.log("div content " + $("[id^=row_]")[divL - 1]);
+              }
+
+              console.log("colCount here bt = " + colCount);
+  }
+
+  function uploadImage(file, colCount) {
 
       //first uplaod the cover_pic
       var formData = new FormData();
       formData.append('file', file);
       formData.append("_token", token);
       $.ajax({
-          url: baseUrl + "admin/property/upload/image",
+          url: baseUrl + "/admin/property/image/add",
           method: "post",
           data: formData,
           processData: false,
@@ -486,22 +511,10 @@
             displayWait(".tab-content");
           },
           success: function(data) {
-              swal("Image uploaded successfully");
+              // console.log("url = " + data.url);
+              swal("info", "Image uploaded successfully", "info");
               cancelWait(".tab-content");
-              //create new <img
-              //set the source as the src as the url
-              if(colCount <= 0 || colCount >= 4) {
-                rowId = Math.floor(Math.random() * 50);
-                var output = '<div class="row" id="row_' + rowId + '"> <div class="col-sm-4"><img class="img-responsive" src="' + data + '" /> </div> </div>';
-                console.log("generated div = " + output);
-                $("#photo-box-body").append(output);
-              } else {
-                //not the first time
-                var output = '<div class="col-sm-4"><img class="img-responsive" src="' + data + '" /> </div>';
-                console.log(" generated div = " + output);
-                $("#row_"+rowId).append(output);
-                colCount++;
-              }
+              previewImage(data);
           },
           error: function (error) {
               swal("error uploading file");
@@ -511,6 +524,43 @@
           }
       });
   }
+
+  $(".img-del").on("click", function(event) {
+      event.preventDefault();
+      deleteImage($(this).attr("data-img"), $(this).attr("data-col"));
+  });
+
+
+
+  function deleteImage(imageName, colId) {
+      console.log("delete Iage called " + imageName + " COL " + colId);
+      var formData = new FormData();
+      formData.append("_token", token);
+      formData.append("image", imageName);
+      $.ajax({
+          url: baseUrl + "/admin/property/image/delete",
+          method: "post",
+          data: formData,
+          processData: false,
+          contentType: false,
+          beforeSend: function() {
+            displayWait("#"+colId);
+          },
+          success: function(data) {
+              // console.log("url = " + data.url);
+              swal("info", "Image Deleted Successfully", "info");
+              cancelWait("#"+colId);
+          },
+          error: function (error) {
+              swal("error deleting file");
+              console.log("error \n" + JSON.stringify(error));
+              cancelWait("#"+colId);
+              return false;
+          }
+      });
+  }
+
+
 
 
 
