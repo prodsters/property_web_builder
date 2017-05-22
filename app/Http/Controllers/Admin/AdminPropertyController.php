@@ -159,18 +159,21 @@ class AdminPropertyController extends Controller
 
     public function deletePhoto(Request $request) {
 
-            Log::info("image delete called");
-            Log::info($request->all());
-            Log::info("request image " . $request['image']);
+            // Log::info("request image delete " . $request['image']);
 
             if(is_null($request->image)) {
                 return response()-json(["error" => "No Image Specified"], 504);
             }
 
+            $photo = Photo::where([ 
+                ["property_id", $request->id],
+                ["url", $request->image]
+                ]);
 
-            Log::info("visibility " . Storage::disk('public')->getVisibility($request->image));            
-            Log::info("size " . Storage::disk('public')->size($request->image));
-            Photo::find($request->id)->delete();
+            if(!is_null($photo)) {
+                $photo->delete();
+            }
+
             Storage::disk('public')->delete($request->image);
 
             return response()->json(["success" => "success"], 200);
