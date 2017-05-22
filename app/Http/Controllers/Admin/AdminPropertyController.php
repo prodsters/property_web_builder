@@ -122,17 +122,34 @@ class AdminPropertyController extends Controller
 
 
     public function addPhoto(Request $request) {
+
+        Log::info($request->all());
         
-        if(Input::hasFile('file') && Input::file('file')->isValid() )
+        if(Input::hasFile('file') && Input::file('file')->isValid() && !is_null($request->id))
         {
 
             $file = Input::file('file');
+
             $extension = $file->getClientOriginalExtension(); 
+
             $fileName = str_random(10) .'.'. $extension;
+
             $clientMimeType = $file->getClientMimeType();
 
+            if(!preg_match("/^(image).+$/", $clientMimeType)) {
+                Log::info("error not an image ". $clientMimeType);
+                return response()->json(["error" => "Not an Image"], 504);
+            }
+
             $original = config('image.profile.original.path') . $fileName;
+
             \Storage::disk('public')->put( $original , file_get_contents( $file->getRealPath()) );
+            
+            //persist the record to the db
+            $photo = new Photo();
+            $photo->property_id = $request->id;
+            $photo->url = $original;
+            $photo->save();
 
             return response()->json(["url" => $original], 200);
         }
@@ -141,12 +158,20 @@ class AdminPropertyController extends Controller
     }
 
     public function deletePhoto(Request $request) {
+
+            Log::info("image delete called");
             Log::info($request->all());
+            Log::info("request image " . $request['image']);
+
             if(is_null($request->image)) {
                 return response()-json(["error" => "No Image Specified"], 504);
             }
 
-            Storage::delete($request->image);
+
+            Log::info("visibility " . Storage::disk('public')->getVisibility($request->image));            
+            Log::info("size " . Storage::disk('public')->size($request->image));
+            Photo::find($request->id)->delete();
+            Storage::disk('public')->delete($request->image);
 
             return response()->json(["success" => "success"], 200);
     }

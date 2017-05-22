@@ -1,5 +1,7 @@
 @extends("layouts.admin")
 @section("title", "Add Property Features")
+@section("page:styles")
+@endsection
 @section("content")
  <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -18,11 +20,9 @@
       @include("partials.alerts")
     </section>
 
-  <form role="form" method="POST" action="#" enctype="multipart/form-data" files="true">
-      {{csrf_field()}}
     <!-- Main content -->
     <section class="content">
-
+    <input type="hidden" id="property_id" value="{{$property->id}}">
       <div class="row">
         <div class="col-md-12">
           <!-- Custom Tabs -->
@@ -37,14 +37,12 @@
             <div class="tab-content">
 
               <div class="tab-pane active" id="tab_1">
-                  <p class="text-muted"> Check the features that this property has. Click the update button when you are done</p>
-                  <div class="box box-primary">
+                  <p class="text-muted"> Mark the available features and click the update button when you are done</p>
+                  <div class="box">
                       <div class="box-header with-border">
                         <h3 class="box-title">Available Amenities</h3>
                       </div>
                       <!-- /.box-header -->
-                      <!-- form start -->
-                      <!-- <form role="form"> -->
                         <div class="box-body">
                           @for($i = 0; $i < count($features); $i++)
                           <div class="row">
@@ -85,8 +83,6 @@
                         </div>
                       </div>
                       <!-- /.box-header -->
-                      <!-- form start -->
-                      <!-- <form class=""> -->
                         <div class="box-body" id="photo-box-body">
 
                            <div class="row">
@@ -97,7 +93,6 @@
 
                         </div>
                         <!-- /.box-body -->
-                      <!-- </form> -->
                     </div>
                     <!-- /.box -->   
               </div>
@@ -366,8 +361,6 @@
     
     </section>
     <!-- /.content -->
-
-    </form>
   </div>
   <!-- /.content-wrapper -->
 
@@ -430,6 +423,15 @@
          }
 
     });
+
+
+
+    $(document).on("click", ".img-del", function(event) {
+        event.preventDefault();
+        deleteImage($(this).attr("data-img"), $(this).attr("data-col"));
+    });
+
+
   });
 
   function verifyImage(file) {
@@ -501,6 +503,7 @@
       var formData = new FormData();
       formData.append('file', file);
       formData.append("_token", token);
+      formData.append("id", $("#property_id").val());
       $.ajax({
           url: baseUrl + "/admin/property/image/add",
           method: "post",
@@ -525,31 +528,20 @@
       });
   }
 
-  $(".img-del").on("click", function(event) {
-      event.preventDefault();
-      deleteImage($(this).attr("data-img"), $(this).attr("data-col"));
-  });
-
-
-
   function deleteImage(imageName, colId) {
-      console.log("delete Iage called " + imageName + " COL " + colId);
-      var formData = new FormData();
-      formData.append("_token", token);
-      formData.append("image", imageName);
+      // console.log("delete Image called " + imageName + " COL " + colId);
       $.ajax({
           url: baseUrl + "/admin/property/image/delete",
           method: "post",
-          data: formData,
-          processData: false,
-          contentType: false,
+          data: {"_token":token,"image":imageName, "id":$("#property_id").val()},
           beforeSend: function() {
             displayWait("#"+colId);
           },
           success: function(data) {
-              // console.log("url = " + data.url);
+              console.log("delete resp = " + JSON.stringify(data));
               swal("info", "Image Deleted Successfully", "info");
               cancelWait("#"+colId);
+              $("#"+colId).remove();
           },
           error: function (error) {
               swal("error deleting file");
