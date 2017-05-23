@@ -15,6 +15,7 @@ use App\Models\Photo;
 use Input;
 use Auth;
 use Storage; 
+use Validator;
 
 class AdminPropertyController extends Controller
 {
@@ -104,7 +105,7 @@ class AdminPropertyController extends Controller
                 "features" => Feature::all()->toArray(),
                 "property" => $property,
                 "currencies" => Currency::all(),
-                "photos" => Photo::where("property_id", $id),
+                "photos" => Photo::where("property_id", $id)->get()->toArray(),
                 "types" => PropertyType::all(),
                 "states" => PropertyState::all()
                 ]);
@@ -120,10 +121,12 @@ class AdminPropertyController extends Controller
 		return redirect()->back()->with("error", "Invalid Request");    	
     }
 
-
+    /**
+    * Async method for adding photos after creating the properties
+    */
     public function addPhoto(Request $request) {
 
-        Log::info($request->all());
+        // Log::info($request->all());
         
         if(Input::hasFile('file') && Input::file('file')->isValid() && !is_null($request->id))
         {
@@ -138,7 +141,7 @@ class AdminPropertyController extends Controller
 
             if(!preg_match("/^(image).+$/", $clientMimeType)) {
                 Log::info("error not an image ". $clientMimeType);
-                return response()->json(["error" => "Not an Image"], 504);
+                return response()->json(["error" => "Not an Image"], 200);
             }
 
             $original = config('image.profile.original.path') . $fileName;
@@ -157,12 +160,17 @@ class AdminPropertyController extends Controller
         return response()->json(["error" => "No File Selected"], 504);
     }
 
+    /**
+    * Async method for deleting photos of properties
+    * I am returning 200 status code, so as to be able to handle the response in the jQuery onSuccess method
+    * it's a known error afterall
+    */
     public function deletePhoto(Request $request) {
 
             // Log::info("request image delete " . $request['image']);
 
-            if(is_null($request->image)) {
-                return response()-json(["error" => "No Image Specified"], 504);
+            if(is_null($request->image) || is_null($property->id)) {
+                return response()-json(["error" => "No Image Specified"], 200);
             }
 
             $photo = Photo::where([ 
@@ -178,5 +186,89 @@ class AdminPropertyController extends Controller
 
             return response()->json(["success" => "success"], 200);
     }
+
+    /**
+    *  method for updating property location data
+    * a form will actually be submitted to this route
+    */
+    public function updateLocation(Request $request) {
+
+         // Log::info($request->all());
+
+         //validate
+          $validator = Validator::make($request->all(), [
+            'property_id' => "required",
+            'street_address' => 'required',
+            'street_number' => 'required',
+            'city' => 'required',
+            'region' => 'required',
+            "country" => "required",
+            "postal_code" => "required"
+            ], 
+            [
+                "property_id.required" => "Invalid Request, Incomplete Parameter"
+            ])->validate();   
+
+         $property = Property::find($request->property_id);
+         
+         if(is_null($property)) {
+            return redirect()->back()->with("error", "Property Not Found");
+         } 
+
+         $property->street_address = $request->street_address;
+         $property->street_number = $request->street_number;
+         $property->city = $request->city;
+         $property->region = $request->region;
+         $property->country = $request->country;
+         $property->postal_code = $request->postal_code;
+         $property->save();
+
+         return redirect()->back()->with("success", "Property Location Updated Successfully"); 
+
+    }
+
+
+    public function updateBasicDetails(Request $request) {
+
+        //validate
+          $validator = Validator::make($request->all(), [
+            'property_id' => "required",
+            'title' => 'required',
+            'description' => "required",
+            'type_id' => "required",
+            "state_id" => "required",
+            "bedroom_count" => "required",
+            "bathroom_count" => "required",
+            "garage_count" => "required",
+            "plot_area" => "required",
+            "construction_area" => "required",
+            "area_unit" => "required"
+            ], 
+            [
+              "property_id.required" => "Invalid Request, Incomplete Parameter"
+            ])->validate();   
+
+         $property = Property::find($request->property_id);
+         
+         if(is_null($property)) {
+            return redirect()->back()->with("error", "Property Not Found");
+         } 
+
+         $property->title = $request->title;
+         $property->description = $request->description;
+         $property->type_id = $request->type_id;
+         $property->state_id = $request->state_id;
+         $property->bedroom_count = $request->bedroom_count;
+         $property->bathroom_count = $request->bathroom_count;
+         $property->garage_count = $request->garage_count;
+         $property->plot_area = $request->plot_area;
+         $property->construction_area = $request->construction_area;
+         $property->area_unit = $request->area_unit;
+         $property->save();
+
+         return redirect()->back()->with("success", "Property Basic Details Updated Successfully");
+
+    }
+
         
 }

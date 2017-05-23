@@ -83,14 +83,26 @@
                         </div>
                       </div>
                       <!-- /.box-header -->
-                        <div class="box-body" id="photo-box-body">
-
-                           <div class="row">
-                              <div class="col-sm-6">
-                                
+                        <div class="box-body">
+                          <?php $im = 0;?>
+                          @while($im < count($photos) )
+                              <div class="row">
+                              <?php $jm = 0; ?>
+                            @while($jm < 3 && $im < count($photos))
+                            <?php $rowId = str_random(5); ?>
+                                <div class="col-sm-4" id="col{{$rowId}}">
+                                  <img class="img-responsive" src="{{asset($photos[$im]['url'])}}"/>
+                                  <button class="btn btn-xs btn-danger img-del" data-img="{{$photos[$im]['url']}}" data-col="col{{$rowId}}">DELETE</button> 
+                                </div>  
+                                <?php $jm++; $im++; ?>
+                            @endwhile                            
                               </div>
+                              <br>
+                          @endwhile
+                          <br>
+                           <div class="row" id="photo-box-body">
+                              
                            </div>
-
                         </div>
                         <!-- /.box-body -->
                     </div>
@@ -179,6 +191,9 @@
                   <div class="row">
                       <div class="col-sm-6">
                         <!-- Form Element sizes -->
+                        <form action="{{route('admin.property.update.location')}}" method="post" id="updateLocation">
+                           <input type="hidden" name="property_id" value="{{$property->id}}">
+                          {{csrf_field()}}
                           <div class="box box-info">
                             <div class="box-body">
                                 <div class="form-group">
@@ -220,11 +235,12 @@
                             </div>
                             <!-- /.box-body -->
                             <div class="box-footer">
-                              <button class="btn btn-info pull-left">Save Changes</button>
+                              <button id="updateLocationBt" class="btn btn-info pull-left">Save Changes</button>
                             </div>
                             <!-- /.box-footer -->
                           </div>
                           <!-- /.box -->
+                        </form>  
                       </div>
                       <div class="col-sm-6">
                         <!-- Form Element sizes -->
@@ -256,6 +272,10 @@
                         <!-- general form elements -->
                         <div class="box box-primary">
                             <div class="box-body">
+                             <form action="{{route('admin.property.update.details')}}" method="post" id="updateDetails">
+                           <input type="hidden" name="property_id" value="{{$property->id}}">
+                          {{csrf_field()}}
+
                               <div class="form-group">
                                 <label for="title">Title</label>
                                 <input type="text" max="240" class="form-control" id="title" name="title" value="{{$property->title}}" required>
@@ -343,12 +363,13 @@
                     <div class="col-sm-6">
                         <div class="box box-info">
                           <div class="box-footer">
-                            <button class="btn btn-info pull-left">Save Changes</button>
+                            <button id="updateDetailsBt" class="btn btn-info pull-left">Save Changes</button>
                           </div>
                           <!-- /.box-footer -->
                         </div>
                     </div>    
                 </div>
+               </form> 
               </div>    
               <!-- tab-pane -->
             </div>
@@ -369,6 +390,7 @@
 
 <script>
   $(function () {
+
     $('input').iCheck({
       checkboxClass: 'icheckbox_square-blue',
       radioClass: 'iradio_square-blue',
@@ -391,39 +413,41 @@
        }
     });
 
-
+    $("#updateLocationBt").on("click", function(event) {
+        event.preventDefault();
+        displayWait(".content");
+        document.getElementById("updateLocation").submit();
+    });
+    $("#updateDetailsBt").on("click", function(event) {
+        event.preventDefault();
+        displayWait(".content");
+        document.getElementById("updateDetails").submit();
+    });
 
     var inputId = 0;
     var rowId= 0; //this is used to track the count of <div class='row'
     var colCount = 0; //this is used to track the number of <div class='col' in a row
 
     $("#addPhotoBt").on("click", function() {
+      //generate random Id
       inputId = Math.floor(Math.random() * 2000);
       // console.log("idFile = " + inputId);
+       //add an invisible file picker to the DOM
        $("#photo-inputs").append('<input type="file" name="photos" id="photos_' + inputId + '" style="display: none;" />'); 
-       $("#photos_" + inputId).trigger("click");
+
+       //attach a listener to the invisible file picker
        $("#photos_" + inputId).on("change", function() {
-         // console.log("changed = " + inputId);
          var file = document.getElementById("photos_" + inputId).files[0];
-         // if(files.length > 0) {
-           uploadImage(file);
-         // } else {
-           // uploadImage(files[0]);
-         // }
+         console.log("photo changed");
+         console.log(file);
+         //upload the image to the server
+         //and add a preview on the client's browser
+         uploadImage(file);
        });
+
+       //trigger click on the invisible file picker
+       $("#photos_" + inputId).trigger("click");
     });
-
-    $(document).on("change", "#photos_" + inputId, function() {
-         console.log("changed = " + inputId);
-         var files = document.getElementById("photos_" + inputId).files;
-         if(files.length > 0) {
-           previewImage(files[files.length -1]);
-         } else {
-           previewImage(files[0]);
-         }
-
-    });
-
 
 
     $(document).on("click", ".img-del", function(event) {
@@ -436,10 +460,11 @@
 
   function verifyImage(file) {
 
-    // console.log("previewImage called " + file);
+      // console.log("previewImage called " + file);
 
-    if(!file) { return; }
-
+        if(!file) { 
+          return false;
+        }
 
          if(file.type.indexOf("image") < 0) { //not an image
             swal("Oops", "Only Images are supported as Profile Picture", "error");
@@ -451,53 +476,12 @@
           return false;
          }
 
-
-         //this will read the file content once the pix has been loaded
-         var reader = new FileReader();
-         var divId = Math.floor(Math.random() * 1000);
-         var rowHtml = "<div class='row'> <div class='col-sm-6> <img id='photo_" + divId + "' class='img-responsive' src='' /> </div> </div>";
-         
-         $("#photo-box-body").append(rowHtml);
-
-         $("#photo-box-body").append()
-         //after reading it, use the result as the src target
-         reader.onload = function(e) {
-
-            // $("#photo_" + divId).attr("src", e.target.result);
-              $("#photo-box-body").append('<div class="row"> <div class="col-sm-6"> <img id="photo_"' + divId + '" class="img-responsive" src="' + e.target.result + '"/> </div> </div> <br>');
-         }
-
-         reader.readAsDataURL(file);
-  }
-
-  function previewImage(data) {
-
-     //count the number of columns created already 
-               colCount = $("[id^=col_]").length;
-
-              rowId = Math.floor(Math.random() * 50);
-
-              if(colCount <= 0 || (colCount % 3) == 0) { 
-                //create new row when there are 3 columns in the last row
-               console.log("create new row");
-                var output = '<div class="row" id="row_' + rowId + '"> <div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /><button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div> </div>';
-                // console.log("generated div = " + output);
-                $("#photo-box-body").append(output);
-              } else {
-                console.log("append column");
-                //append to the last row created
-                var output = '<div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /> <button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div>';
-                // console.log(" generated div = " + output);
-                var divL = $("[id^=row_]").length;
-                console.log("divL == " + divL);
-                $("[id^=row_]:last-child").append(output);
-                console.log("div content " + $("[id^=row_]")[divL - 1]);
-              }
-
-              console.log("colCount here bt = " + colCount);
+         return true;
   }
 
   function uploadImage(file, colCount) {
+
+      if(!verifyImage(file)) { return false; }
 
       //first uplaod the cover_pic
       var formData = new FormData();
@@ -526,6 +510,31 @@
               return false;
           }
       });
+  }
+
+  function previewImage(data) {
+
+              //count the number of columns created already 
+              colCount = $("[id^=col_]").length;
+
+              rowId = Math.floor(Math.random() * 50);
+
+              if(colCount <= 0 || (colCount % 3) == 0) { 
+                //create new row when there are 3 columns in the last row
+               console.log("create new row");
+                var output = '<div class="row" id="row_' + rowId + '"> <div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /><button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div> </div>';
+                // console.log("generated div = " + output);
+                $("#photo-box-body").append(output);
+              } else {
+                console.log("append column");
+                //append to the last row created
+                var output = '<div id="col_' + rowId + '" class="col-sm-4"><img class="img-responsive" src="' + baseUrl + '/' + data.url + '" /> <button class="btn btn-xs btn-danger img-del" data-img="' + data.url + '" data-col="col_' + rowId + '">DELETE</button> </div>';
+                // console.log(" generated div = " + output);
+                var divL = $("[id^=row_]").length;
+                console.log("divL == " + divL);
+                $("[id^=row_]:last-child").append(output);
+                console.log("div content " + $("[id^=row_]")[divL - 1]);
+              }
   }
 
   function deleteImage(imageName, colId) {
