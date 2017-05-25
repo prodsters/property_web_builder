@@ -44,13 +44,18 @@
                       </div>
                       <!-- /.box-header -->
                         <div class="box-body">
+                        <form action="{{route('admin.property.update.features')}}" method="post" id="updatedFeatures">
+                        <input type="hidden" name="property_id" value="{{$property->id}}">
+                        <input type="hidden" name="ids">                          
+                          {{csrf_field()}}
+
                           @for($i = 0; $i < count($features); $i++)
                           <div class="row">
                             @for($j = 0; $j < 3; $j++)  
                             <div class="col-sm-4">
                               <div class="checkbox icheck">
                                     <label>
-                                      <input type="checkbox" name="{{$features[$i]['id']}}" > {{$features[$i]['name']}}
+                                      <input type="checkbox" @if(in_array($features[$i]['id'], $property_features)) checked @endif id="{{$features[$i]['id']}}" name="features_checkbox" > {{$features[$i]['name']}}
                                     </label>
                                </div>
                           </div>
@@ -61,10 +66,11 @@
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer">
-                          <button class="btn btn-info pull-left">Save Changes</button>
+                          <button id="updatedFeaturesBt" class="btn btn-info pull-left">Save Changes</button>
                         </div>
                         <!-- /.box-footer -->
                   </div>
+                  </form>
                     <!-- /.box -->
               </div>
               <!-- /.tab-pane -->
@@ -113,19 +119,22 @@
               <div class="tab-pane" id="tab_3">
                   <div class="box box-info" id="pricing-info-box">
                     <div class="box-body">
+                    <form action="{{route('admin.property.update.pricing')}}" method="POST" id="updatePricing">
+                       <input type="hidden" name="property_id" value="{{$property->id}}">
+                          {{csrf_field()}}
                       <div class="row">
                         <div class="col-sm-6">
                             <div class="col-sm-3">
                               <div class="checkbox icheck">
                                 <label>
-                                  <input type="checkbox" name="sale"> For Sale
+                                  <input type="checkbox" name="sale" @if($property->sale) checked @endif> For Sale
                                 </label>
                               </div>
                             </div>
                             <div class="col-sm-3">
                               <div class="checkbox icheck">
                                 <label>
-                                  <input type="checkbox" name="rental"> For Rent
+                                  <input type="checkbox" name="rental" @if($property->rental) checked @endif> For Rent
                                 </label>
                               </div>
                             </div>
@@ -139,49 +148,49 @@
                             <div class="col-sm-3">
                               <div class="checkbox icheck">
                                 <label>
-                                  <input type="checkbox" name="is_public" checked> Show on Site
+                                  <input type="checkbox" name="is_public" @if($property->is_public)checked @endif> Show on Site
                                 </label>
                               </div>
                             </div>
                             <br>
-                            <div id="selling_price" style="display: none;">
+                            <div id="selling_price" @if(!$property->sale) style="display: none;" @endif>
                               <div class="form-group">
                                 <label for="current_selling_price">Current Selling Price</label>
-                                <input type="number" min="0" class="form-control" id="current_selling_price" name="current_selling_price">
+                                <input type="number" min="0" class="form-control" id="current_selling_price" name="current_selling_price" value="{{$property->current_selling_price}}">
                               </div>
                               <div class="form-group">
                                 <label for="original_selling_price">Original Selling Price</label>
-                                <input type="number" min="0" class="form-control" id="original_selling_price" name="original_selling_price" >
+                                <input type="number" min="0" class="form-control" id="original_selling_price" name="original_selling_price" value="{{$property->original_selling_price}}">
                               </div>
                             </div>
-                            <div id="rental_price" style="display: none;">  
+                            <div id="rental_price" @if(!$property->rental) style="display: none;" @endif>  
                               <div class="form-group">
                                 <label for="current_rental_price">Current Rental Price</label>
-                                <input type="number" min="0" class="form-control" id="current_rental_price" name="current_rental_price" >
+                                <input type="number" min="0" class="form-control" id="current_rental_price" name="current_rental_price" value="{{$property->current_rental_price}}">
                               </div>
                               <div class="form-group">
                                 <label for="original_rental_price">Original Rental Price</label>
-                                <input type="number" min="0" class="form-control" id="original_rental_price" name="original_rental_price">
+                                <input type="number" min="0" class="form-control" id="original_rental_price" name="original_rental_price" value="{{$property->original_rental_price}}">
                               </div>
                             </div>  
                             <div class="form-group">
                               <label for="currency_id">Currency</label>
                               <select class="form-control" name="currency_id" required>
                                 @foreach($currencies as $currency)
-                                <option value="{{$currency->id}}">{{$currency->name}}  (<span>{!!$currency->symbol!!}</span>)</option>
+                                <option @if($currency->id == $property->currency_id) selected @endif value="{{$currency->id}}">{{$currency->name}}  (<span>{!!$currency->symbol!!}</span>)</option>
                                 @endforeach
                               </select>
                             </div>
                             <br>
                         </div>
-                      </div>      
+                      </div>    
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
-                      <button class="btn btn-info pull-left">Save Changes</button>
+                      <button id="updatePricingBt" class="btn btn-info pull-left">Save Changes</button>
                     </div>
                     <!-- /.box-footer -->
-
+                    </form>
                   </div>
                   <!-- /.box --> 
               </div>
@@ -418,10 +427,31 @@
         displayWait(".content");
         document.getElementById("updateLocation").submit();
     });
+    
     $("#updateDetailsBt").on("click", function(event) {
         event.preventDefault();
         displayWait(".content");
         document.getElementById("updateDetails").submit();
+    });
+
+    $("#updatePricingBt").on("click", function(event) {
+            event.preventDefault();
+            if(!validatePricingInfo()) {
+              return false;
+            }
+            displayWait(".content");
+            document.getElementById("updatePricing").submit();
+        });
+
+    $("#updatedFeaturesBt").on("click", function(event) {
+        event.preventDefault();
+        displayWait(".content");
+        var ids = ""; 
+        $("input[name='features_checkbox']:checked").each(function() {
+          ids = ids + $(this).attr("id") + ",";
+        });
+        $("input[name='ids']").val(ids);
+        document.getElementById("updatedFeatures").submit();
     });
 
     var inputId = 0;
@@ -559,6 +589,25 @@
               return false;
           }
       });
+  }
+
+  function validatePricingInfo() {
+     
+      if(!$("input[name='sale']").is(":checked") && !$("input[name='rental']").is(":checked")) {
+           swal("You have not specify either this property is for sale or rental"); 
+           return false; 
+        }
+
+        if( $("input[name='sale']").is(":checked") && !$("#current_selling_price").val() && !$("#original_selling_price").val()) {
+           swal("Current and Original Selling Price can not be zero though they can be the same"); 
+           return false; 
+        }
+         if( $("input[name='rental']").is(":checked") && !$("#current_rental_price").val() && !$("#original_rental_price").val()) {
+           swal("Current and Original Rental Price can not be zero though they can be the same");
+           return false; 
+        }
+
+        return true;
   }
 
 

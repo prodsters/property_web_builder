@@ -10,6 +10,7 @@ class Property extends Model
     //
     protected $table = "properties";
 
+    protected $guarded = [];
 
     public function author() {
     	return $this->belongsTo(User::class);

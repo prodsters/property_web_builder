@@ -23,9 +23,9 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	Route::post("/property/image/delete", "AdminPropertyController@deletePhoto")->name("admin.property.delete.photo");
 	Route::post("/property/update/location", "AdminPropertyController@updateLocation")->name("admin.property.update.location");
 	Route::post("/property/update/details", "AdminPropertyController@updateBasicDetails")->name("admin.property.update.details");
-
+	Route::post("/property/update/pricing", "AdminPropertyController@updatePricing")->name("admin.property.update.pricing");
+	Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
 	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
-	
 });
 
 Route::get('/', function () {

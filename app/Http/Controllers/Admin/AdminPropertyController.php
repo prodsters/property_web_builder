@@ -26,10 +26,21 @@ class AdminPropertyController extends Controller
     }
 
 
+    /**
+    *
+    * This method will serve the properties index page of the admin dashboard
+    * it will list all the properties
+    */
     public function index() {
         return view("admin.property.index", ["properties" => Property::all()]);
     }
 
+    /**
+    * this method will be called to add a new property afresh.
+    * it will only add basic details, location info, and pricing info
+    * on success, it will redirect the user back to the edit page of the created property
+    * where the user can now add photos and property features.
+    */
     public function add(Request $request) {
 
     	if($request->isMethod("GET")) {
@@ -61,32 +72,41 @@ class AdminPropertyController extends Controller
                 "country" => "required",
                 "postal_code" => "required",
                 ]);
-
-            $requestArray = $request->except("_token");
-
-            Log::info("request Array");
-            Log::info($requestArray);
-
-            if(array_key_exists("rental", $requestArray) && !is_null($requestArray['rental'])) {
-                $requestArray['rental'] = true;
-            }
-            if(array_key_exists("sale", $requestArray) && !is_null($requestArray['sale'])) {
-                $requestArray['sale'] = true;
-            }
-            if(array_key_exists("is_public", $requestArray) && !is_null($requestArray['is_public'])) {
-                $requestArray['is_public'] = true;
-            }
-
-            $requestArray['user_id'] = Auth::id();
-            $requestArray['reference_no'] = str_random(5);
-
             
-            Log::info("after");
-            Log::info($requestArray);
+             $property = new Property();
+             $property->title = $request->title;
+             $property->description = $request->description;
+             $property->type_id = $request->type_id;
+             $property->state_id = $request->state_id;
+             $property->bedroom_count = $request->bedroom_count;
+             $property->bathroom_count = $request->bathroom_count;
+             $property->garage_count = $request->garage_count;
+             $property->plot_area = $request->plot_area;
+             $property->construction_area = $request->construction_area;
+             $property->area_unit = $request->area_unit;  
+             $property->is_featured = !is_null($request->is_featured) ? true : false;
+             $property->is_public = !is_null($request->is_public) ? true : false;
 
-            Property::create($requestArray);
-    		
-            return redirect()->route("admin.property.add.features")->with("success", "Property Created Successfully");
+             $property->sale = !is_null($request->sale) ? true : false;
+             $property->rental = !is_null($request->rental) ? true : false;
+             $property->current_selling_price = $request->current_selling_price;
+             $property->current_rental_price = $request->current_rental_price;
+             $property->original_selling_price = $request->original_selling_price;
+             $property->original_rental_price = $request->original_rental_price;
+             $property->currency_id = $request->currency_id;
+             $property->user_id = Auth::id();
+             $property->reference_no = str_random(5);
+
+             $property->street_address = $request->street_address;
+             $property->street_number = $request->street_number;
+             $property->city = $request->city;
+             $property->region = $request->region;
+             $property->country = $request->country;
+             $property->postal_code = $request->postal_code;
+
+             $property = Property::create($property->toArray());
+            
+            return redirect()->route("admin.property.edit", ["id" => $property->id])->with("success", "Property Created Successfully, Use the tab to add photos, features and change other settings.");
     	}
 
     	return redirect()->back()->with("error", "Invalid Request");
@@ -103,6 +123,8 @@ class AdminPropertyController extends Controller
 
     		return view("admin.property.edit", [
                 "features" => Feature::all()->toArray(),
+                "property_features" => PropertyFeature::where("property_id", $property->id)
+                                            ->get()->pluck("feature_id")->all(),
                 "property" => $property,
                 "currencies" => Currency::all(),
                 "photos" => Photo::where("property_id", $id)->get()->toArray(),
@@ -227,7 +249,10 @@ class AdminPropertyController extends Controller
 
     }
 
-
+    /**
+    *
+    * This method will update the basic details of the property
+    */ 
     public function updateBasicDetails(Request $request) {
 
         //validate
@@ -268,6 +293,83 @@ class AdminPropertyController extends Controller
 
          return redirect()->back()->with("success", "Property Basic Details Updated Successfully");
 
+    }
+
+    /**
+    * This method is used to update the pricing information form the Change Pricing tab
+    * in the admin dashboard of editing properties
+    */ 
+    public function updatePricing(Request $request) {
+
+        //validate
+          $validator = Validator::make($request->all(), [
+            'property_id' => "required",
+            'currency_id' => 'required',
+            ], 
+            [
+              "property_id.required" => "Invalid Request, Incomplete Parameter"
+            ])->validate();   
+
+         $property = Property::find($request->property_id);
+         
+         if(is_null($property)) {
+            return redirect()->back()->with("error", "Property Not Found");
+         } 
+
+         $property->is_featured = !is_null($request->is_featured) ? true : false;
+         $property->is_public = !is_null($request->is_public) ? true : false;
+         $property->sale = !is_null($request->sale) ? true : false;
+         $property->rental = !is_null($request->rental) ? true : false;
+         $property->current_selling_price = $request->current_selling_price;
+         $property->current_rental_price = $request->current_rental_price;
+         $property->original_selling_price = $request->original_selling_price;
+         $property->original_rental_price = $request->original_rental_price;
+         $property->currency_id = $request->currency_id;
+         $property->save();
+
+         return redirect()->back()->with("status", "Property Pricing details updated Successfully");
+    }
+
+    /**
+    * This method will be called to add new features to the property
+    * if the features already exists for the property, it will not be created at all
+    */
+    public function addFeatures(Request $request) {
+
+        Log::info($request->all());
+
+        //validate
+          $validator = Validator::make($request->all(), [
+            'property_id' => "required",
+            'ids' => 'required'
+            ], 
+            [
+              "property_id.required" => "Invalid Request, Incomplete Parameter"
+            ])->validate();   
+
+            $property = Property::find($request->property_id);
+         
+         if(is_null($property)) {
+            return redirect()->back()->with("error", "Property Not Found");
+         }
+
+         $idsArray = preg_split("/[,]/", $request->ids);
+         array_pop($idsArray); //deletes the last'','
+         Log::info("idsArray ");
+         Log::info($idsArray);
+
+
+         $superArray = [];
+
+         foreach ($idsArray as $key => $value) {
+            //create it when it's not there already for the property
+            PropertyFeature::firstOrCreate([
+                                    "property_id" => $property->id,
+                                    "feature_id" => $value
+                                ]);
+         }
+
+         return redirect()->back()->with("success", "Property Features Updated Successfully");
     }
 
         

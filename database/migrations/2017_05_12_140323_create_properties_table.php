@@ -25,8 +25,8 @@ class CreatePropertiesTable extends Migration
             $table->string("reference_no")->nullable();
             $table->string("title");
             $table->text("description");
-            $table->boolean("is_featured")->default(false);
-            $table->boolean("is_public")->default(true);
+            $table->boolean("is_featured")->nullable()->default(false);
+            $table->boolean("is_public")->default(true)->nullable();
             
             $table->unsignedInteger("currency_id");
             $table->unsignedInteger("type_id");
