@@ -17,7 +17,7 @@
   <!-- page styles -->
   <!-- blockUI -->
   <link rel="stylesheet" href="{{asset('assets/css/blockui.min.css')}}">
-
+ 
    @yield("page:styles")
 
 
@@ -26,11 +26,6 @@
   <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" href="{{asset('assets/admin/css/skins/_all-skins.css')}}">
-
-   <!-- sweetalert -->
-  <link rel="stylesheet" href="{{asset('assets/css/sweetalert.css')}}">
-  <link rel="stylesheet" href="{{asset('assets/css/sweet-alert-animations.min.css')}}">
-
 
  <script type="text/javascript">
    var token = "{{csrf_token()}}";
@@ -239,10 +234,10 @@
 <script src="{{asset('assets/admin/plugins/iCheck/icheck.min.js')}}"></script>
 <!-- blockUI -->
 <script src="{{asset('assets/js/jquery.blockUI.js')}}"></script>
+ <!-- eModal -->
+<script src="{{asset('assets/admin/js/eModal.min.js')}}"></script>
 <!-- utility -->
 <script src="{{asset('assets/admin/js/utility.js')}}"></script>
-<!-- sweet alert -->
-<script src="{{asset('assets/js/sweetalert.min.js')}}"></script>
 
 @yield("page:scripts")
 

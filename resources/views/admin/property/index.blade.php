@@ -18,6 +18,12 @@
         <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li class="active"><a href="">Properties</a></li>
       </ol>
+      <form action="{{route('admin.property.delete')}}" method="post" id="deleteForm">
+          {{csrf_field()}}
+          <input type="hidden" name="id"> 
+      </form>
+       <br>
+      @include("partials.alerts")
     </section>
 
     <!-- Main content -->
@@ -53,7 +59,7 @@
                   <td>{{$property->reference_no}}</td>
                   <td>
                   	<a class="btn btn-xs btn-success" href="{{route('admin.property.edit',['id'=>$property->id])}}">EDIT</a>
-                  	<a class="btn btn-xs btn-danger" href="#">DEL</a>
+                  	<a class="btn btn-xs btn-danger del" data-id="{{$property->id}}" href="#">DEL</a>
                   </td>
                 </tr>
                 @endforeach
@@ -81,11 +87,22 @@
 	$(function () {
     $('#propertiesTable').DataTable({
       "paging": true,
-      // "lengthChange": false,
-      // "ordering": true,
-      // "info": true,
-      // "autoWidth": false
     });
+
+    $(document).on("click", ".del", function() {
+        
+        $("input[name='id']").val( $(this).attr("data-id") );
+        eModal.confirm({message:"Are you sure you want to delete? It can't be reversed once done!", title: "Confirm", size: "sm"}).then(function() {
+                //ok button clicked
+                displayWait("#propertiesTable");
+                document.getElementById("deleteForm").submit();
+              }, 
+              function() {
+                //cancel bt clicked
+                //do nothing;
+              });
+    }); 
+
   });
 </script>
 @endsection

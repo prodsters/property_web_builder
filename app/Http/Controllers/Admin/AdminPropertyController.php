@@ -112,6 +112,41 @@ class AdminPropertyController extends Controller
     	return redirect()->back()->with("error", "Invalid Request");
     }
 
+
+    public function deleteProperty(Request $request) {
+
+        Log::info("delete property invoked");
+        Log::info($request->all());
+
+         //validate
+          $validator = Validator::make($request->all(), [
+            'id' => "required"
+            ], 
+            [
+              "id.required" => "Invalid Request, Incomplete Parameter"
+            ])->validate();   
+
+         $property = Property::find($request->id);
+         
+         if(is_null($property)) {
+            return redirect()->back()->with("error", "Property Not Found");
+         }
+
+         Log::info("property before delettion");
+         Log::info($property);
+
+         $result = $property->delete();
+
+         Log::info("delete result == " + $result);
+
+         return redirect()->back()->with("status", "Property has been deleted!");
+    }
+
+
+    /**
+    *
+    * This will serve the editing page for a property
+    */
     public function edit(Request $request, $id) {
 
     	if($request->isMethod("GET")) {
@@ -144,7 +179,7 @@ class AdminPropertyController extends Controller
     }
 
     /**
-    * Async method for adding photos after creating the properties
+    * Async method for adding photos after creating property
     */
     public function addPhoto(Request $request) {
 
@@ -191,7 +226,7 @@ class AdminPropertyController extends Controller
 
             // Log::info("request image delete " . $request['image']);
 
-            if(is_null($request->image) || is_null($property->id)) {
+            if(is_null($request->image) || is_null($request->id)) {
                 return response()-json(["error" => "No Image Specified"], 200);
             }
 

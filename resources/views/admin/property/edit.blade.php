@@ -497,12 +497,12 @@
         }
 
          if(file.type.indexOf("image") < 0) { //not an image
-            swal("Oops", "Only Images are supported as Profile Picture", "error");
+            eModal.alert({message: "Only Images are supported as Profile Picture", size: "sm"});
             return false;
          }
 
          if(file.size > 9000000) { //max 9mb
-          swal("Oops", "Image File Too Large, max is 9MB", "error");
+          eModal.alert({message: "Image File Too Large, max is 9MB", size:"sm"});
           return false;
          }
 
@@ -528,13 +528,17 @@
             displayWait(".tab-content");
           },
           success: function(data) {
-              // console.log("url = " + data.url);
-              swal("info", "Image uploaded successfully", "info");
-              cancelWait(".tab-content");
-              previewImage(data);
+              // console.log("data = " + JSON.stringify(data));
+              if(!data.error) {
+                eModal.alert({message: "Image uploaded successfully", size:"sm"});
+                cancelWait(".tab-content");
+                previewImage(data);
+              } else {
+                 eModal.alert({message: data.error, size:"sm", title:"Error!"});
+              }
           },
           error: function (error) {
-              swal("error uploading file");
+             eModal.alert({message: "Server Error!", size:"sm", title:"Error!"});
               console.log("error \n" + JSON.stringify(error));
               cancelWait(".tab-content");
               return false;
@@ -577,13 +581,17 @@
             displayWait("#"+colId);
           },
           success: function(data) {
-              console.log("delete resp = " + JSON.stringify(data));
-              swal("info", "Image Deleted Successfully", "info");
-              cancelWait("#"+colId);
-              $("#"+colId).remove();
+              // console.log("delete resp = " + JSON.stringify(data));
+              if(!data.error) {
+                eModal.alert({message:"Image Deleted Successfully", size:"sm"});
+                cancelWait("#"+colId);
+                $("#"+colId).remove();
+              } else {
+                 eModal.alert({message:data.error, size:"sm", title:"Error!"});
+              }
           },
           error: function (error) {
-              swal("error deleting file");
+              eModal.alert({message:"Server Error", size:"sm", title:"Error!"});
               console.log("error \n" + JSON.stringify(error));
               cancelWait("#"+colId);
               return false;
@@ -594,16 +602,22 @@
   function validatePricingInfo() {
      
       if(!$("input[name='sale']").is(":checked") && !$("input[name='rental']").is(":checked")) {
-           swal("You have not specify either this property is for sale or rental"); 
+           eModal.alert({message: "You have not specify if this property is for sale or rental", size: "sm"}); 
            return false; 
         }
 
         if( $("input[name='sale']").is(":checked") && !$("#current_selling_price").val() && !$("#original_selling_price").val()) {
-           swal("Current and Original Selling Price can not be zero though they can be the same"); 
-           return false; 
+           eModal.alert({
+                        message: "Current and Original Selling Price can not be zero though they can be the same",
+                        size: "sm"
+                      }); 
+           return false;
         }
          if( $("input[name='rental']").is(":checked") && !$("#current_rental_price").val() && !$("#original_rental_price").val()) {
-           swal("Current and Original Rental Price can not be zero though they can be the same");
+           eModal.alert({ 
+            message: "Current and Original Rental Price can not be zero though they can be the same",
+            size: "sm"
+          });
            return false; 
         }
 
