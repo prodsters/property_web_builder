@@ -77,4 +77,4 @@ Contribution Guideline
 
 License
 =======
-[MIT License](https://opensource.org/licenses/MIT)
+[MIT License](https://github.com/prodsters/property_web_builder/blob/master/LICENSE)
