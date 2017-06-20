@@ -38,7 +38,10 @@ Admin-End
 - Edit Site Contents: About, Contact, Privacy Policy, Terms, Socil Media Account Links
 - Edit Home Page Contents
 - Manage Users from the Backend
-- 
+- Site Settings: Features, Property Types, Property States, and Currency. The database table/migration 
+for these has been designed already. All is needed is a CRUD for each of them.
+- Site Contents: No migration has been created for this. So you will have to create a common table for the site contents
+
 
 Features IMPLEMENTED
 ====================

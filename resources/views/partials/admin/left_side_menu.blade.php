@@ -21,14 +21,24 @@
         </li>
         <li class="header">PROPERTIES</li>
         <li class="treeview">
-          <a href="{{route('admin.property.index')}}">
+          <a href="#">
             <i class="fa fa-home"></i> <span>Properties</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
-        </li>
-        <li class="treeview">
-          <a href="{{route('admin.property.add')}}">
-            <i class="fa fa-plus-square"></i> <span>Add Property</span>
-          </a>
+          <ul class="treeview-menu">
+            <li>
+              <a href="{{route('admin.property.index')}}">
+                <i class="fa fa-eye"></i> <span>View Properties</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{route('admin.property.add')}}">
+                <i class="fa fa-plus-square"></i> <span>Add Property</span>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="header">USERS</li>
         <li class="treeview">
@@ -39,13 +49,33 @@
         <li class="header">WEBSITE</li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-cog"></i> <span>Settings</span>
+            <i class="fa fa-cog"></i>
+            <span>Settings</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> Features</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Property Types</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Property States</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Currency</a></li>
+          </ul>
         </li>
         <li class="treeview">
           <a href="#">
-            <i class="fa fa-book"></i> <span>Contents</span>
+            <i class="fa fa-book"></i>
+            <span>Site Contents</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
           </a>
+          <ul class="treeview-menu">
+            <li><a href="#"><i class="fa fa-circle-o"></i> About Content</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Terms and Conditions</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Contact</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Footer</a></li>
+          </ul>
         </li>
       </ul>
     </section>
