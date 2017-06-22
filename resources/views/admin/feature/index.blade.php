@@ -1,5 +1,5 @@
 @extends("layouts.admin")
-@section("title", "Admin Properties")
+@section("title", "Admin Features")
 @section("page:styles")
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('assets/admin/plugins/datatables/dataTables.bootstrap.css')}}">
@@ -11,12 +11,12 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1>
-                Properties
-                <small>list of all properties on the platform</small>
+                Features
+                <small>list of all features on the platform</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active"><a href="">Properties</a></li>
+                <li class="active"><a href="">Features</a></li>
             </ol>
             <form action="{{route('admin.feature.delete')}}" method="post" id="deleteForm">
                 {{csrf_field()}}
