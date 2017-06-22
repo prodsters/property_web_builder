@@ -56,10 +56,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Features</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Property Types</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Property States</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Currency</a></li>
+            <li><a href="{{route('admin.feature.index')}}"><i class="fa fa-circle-o"></i> Features</a></li>
+            <li><a href="{{route('admin.property_type.index')}}"><i class="fa fa-circle-o"></i> Property Types</a></li>
+            <li><a href="{{route('admin.property_state.index')}}"><i class="fa fa-circle-o"></i> Property States</a></li>
+            <li><a href="{{route('admin.currency.index')}}"><i class="fa fa-circle-o"></i> Currency</a></li>
           </ul>
         </li>
         <li class="treeview">

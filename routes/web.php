@@ -28,6 +28,33 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	Route::post("/property/update/pricing", "AdminPropertyController@updatePricing")->name("admin.property.update.pricing");
 	Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
 	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
+
+	//site settings
+    //features
+    Route::get('/features','AdminFeatureController@index')->name('admin.feature.index');
+    Route::match(["GET","POST"],'feature/add','AdminFeatureController@add')->name('admin.feature.add');
+    Route::match(["GET","POST"],'feature/edit/{feature}','AdminFeatureController@edit')->name('admin.feature.edit');
+    Route::post('/feature/delete','AdminFeatureController@remove')->name('admin.feature.delete');
+
+    //property types
+    Route::get('/property-types','AdminPropertyTypeController@index')->name('admin.property_type.index');
+    Route::match(["GET","POST"],'property-type/add','AdminPropertyTypeController@add')->name('admin.property_type.add');
+    Route::match(["GET","POST"],'property-type/edit/{property_type}','AdminPropertyTypeController@edit')->name('admin.property_type.edit');
+    Route::post('/property-type/delete','AdminPropertyTypeController@remove')->name('admin.property_type.delete');
+
+    //property states
+    Route::get('/property-states','AdminPropertyStateController@index')->name('admin.property_state.index');
+    Route::match(["GET","POST"],'property-state/add','AdminPropertyStateController@add')->name('admin.property_state.add');
+    Route::match(["GET","POST"],'property-state/edit/{property_state}','AdminPropertyStateController@edit')->name('admin.property_state.edit');
+    Route::post('/property-state/delete','AdminPropertyStateController@remove')->name('admin.property_state.delete');
+
+    //currencies
+    Route::get('/currencies','AdminCurrencyController@index')->name('admin.currency.index');
+    Route::match(["GET","POST"],'currency/add','AdminCurrencyController@add')->name('admin.currency.add');
+    Route::match(["GET","POST"],'currency/edit/{currency}','AdminCurrencyController@edit')->name('admin.currency.edit');
+    Route::post('/currency/delete','AdminCurrencyController@remove')->name('admin.currency.delete');
+
+
 });
 
 Route::get('/', function () {
