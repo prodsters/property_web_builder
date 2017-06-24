@@ -71,10 +71,10 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> About Content</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Terms and Conditions</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Contact</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Footer</a></li>
+            <li><a href="{{route('admin.contents.about')}}"><i class="fa fa-circle-o"></i> About Content</a></li>
+            <li><a href="{{route('admin.contents.terms_and_conditions')}}"><i class="fa fa-circle-o"></i> Terms and Conditions</a></li>
+            <li><a href="{{route('admin.contents.contact')}}"><i class="fa fa-circle-o"></i> Contact</a></li>
+            <li><a href="{{route('admin.contents.footer')}}"><i class="fa fa-circle-o"></i> Footer</a></li>
           </ul>
         </li>
       </ul>
