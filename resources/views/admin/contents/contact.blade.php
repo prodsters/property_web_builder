@@ -11,9 +11,8 @@
                 <small>You can update contact content below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">site contents</a></li>
-                <li class="active">contact</li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Site contact</li>
             </ol>
             <br>
             @include("partials.alerts")
@@ -37,7 +36,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="title">Contact Content</label>
-                                    <textarea rows="5" class="form-control" id="contact" name="contact" placeholder="Example You can reach us with our number 081xxxxxxxx" required>{{!is_null($contact) ? $contact : ''}}</textarea>
+                                    <textarea rows="5" class="form-control" id="contact" name="contact" placeholder="Example You can reach us with our number 081xxxxxxxx" required>{{!is_null($contact) ? $contact->value : ''}}</textarea>
                                 </div>
                             </div>
                             <!-- /.box-body -->

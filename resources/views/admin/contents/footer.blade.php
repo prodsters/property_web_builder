@@ -11,9 +11,8 @@
                 <small>You can update footer content below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">site contents</a></li>
-                <li class="active">footer</li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Site footer</li>
             </ol>
             <br>
             @include("partials.alerts")
@@ -37,7 +36,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="title">Footer Content</label>
-                                    <textarea rows="3" class="form-control" id="footer" name="footer" placeholder="Example Copyright © 2017 Property Web Builder. All rights reserved." required>{{!is_null($footer) ? $footer : ''}}</textarea>
+                                    <textarea rows="3" class="form-control" id="footer" name="footer" placeholder="Example Copyright © 2017 Property Web Builder. All rights reserved." required>{{!is_null($footer) ? $footer->value : ''}}</textarea>
                                 </div>
                             </div>
                             <!-- /.box-body -->

@@ -11,8 +11,8 @@
                 <small>update feature below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Feature</a></li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.feature.index')}}">Feature</a></li>
                 <li class="active">Update</li>
             </ol>
             <br>
