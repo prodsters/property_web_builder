@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSiteContentsTable extends Migration
+class CreateSiteContentsTable1 extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,8 @@ class CreateSiteContentsTable extends Migration
     {
         Schema::create('site_contents', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('about')->nullable();
-            $table->text('terms_and_conditions')->nullable();
-            $table->text('contact')->nullable();
-            $table->text('footer')->nullable();
+            $table->text('key')->nullable();
+            $table->text('value')->nullable();
             $table->timestamps();
         });
     }

@@ -11,8 +11,8 @@
         <small>supply full details below</small>
       </h1>
       <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="#">Features</a></li>
+        <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{route('admin.feature.index')}}">Features</a></li>
         <li class="active">Add</li>
       </ol>
       <br>
