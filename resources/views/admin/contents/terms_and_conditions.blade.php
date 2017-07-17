@@ -11,9 +11,8 @@
                 <small>You can update terms and conditions content below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">site contents</a></li>
-                <li class="active">terms and conditions</li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Site terms and conditions</li>
             </ol>
             <br>
             @include("partials.alerts")
@@ -37,7 +36,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="title">Terms and Conditions Content</label>
-                                    <textarea rows="5" class="form-control" id="terms_and_conditions" name="terms_and_conditions" placeholder="Example We charge for agent fee" required>{{!is_null($terms_and_conditions) ? $terms_and_conditions : ''}}</textarea>
+                                    <textarea rows="5" class="form-control" id="terms_and_conditions" name="terms_and_conditions" placeholder="Example We charge for agent fee" required>{{!is_null($terms_and_conditions) ? $terms_and_conditions->value : ''}}</textarea>
                                 </div>
                             </div>
                             <!-- /.box-body -->

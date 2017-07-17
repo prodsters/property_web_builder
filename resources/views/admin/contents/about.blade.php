@@ -11,9 +11,8 @@
                 <small>You can update about content below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">site contents</a></li>
-                <li class="active">about</li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">Site about</li>
             </ol>
             <br>
             @include("partials.alerts")
@@ -37,7 +36,7 @@
                             <div class="box-body">
                                 <div class="form-group">
                                     <label for="title">About Content</label>
-                                    <textarea rows="7" class="form-control" id="about" name="about" placeholder="Example We develop high quality software" required>{{!is_null($about) ? $about : ''}}</textarea>
+                                    <textarea rows="7" class="form-control" id="about" name="about" placeholder="Example We develop high quality software" required>{{!is_null($about) ? $about->value : ''}}</textarea>
                                 </div>
                             </div>
                             <!-- /.box-body -->

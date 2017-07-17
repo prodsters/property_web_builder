@@ -11,8 +11,8 @@
                 <small>Add new property types below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">Property types</a></li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.property_type.index')}}">Property types</a></li>
                 <li class="active">Add</li>
             </ol>
             <br>

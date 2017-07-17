@@ -11,8 +11,8 @@
                 <small>Add new currency below</small>
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                <li><a href="#">currency</a></li>
+                <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{route('admin.currency.index')}}">Currency</a></li>
                 <li class="active">Add</li>
             </ol>
             <br>
@@ -41,7 +41,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="title">Symbol</label>
-                                    <input type="text" class="form-control" id="symbol" name="symbol" placeholder="Example &#8358;" required>
+                                    <input type="text" class="form-control" id="symbol" name="symbol" placeholder="Example {{htmlspecialchars('&#8358;')}}" required>
                                 </div>
                             </div>
                             <!-- /.box-body -->

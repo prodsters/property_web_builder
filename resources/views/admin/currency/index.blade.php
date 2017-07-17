@@ -16,7 +16,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li><a href="{{route('admin.dashboard.index')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
-                <li class="active"><a href="">Properties</a></li>
+                <li class="active"><a href="">Currency</a></li>
             </ol>
             <form action="{{route('admin.currency.delete')}}" method="post" id="deleteForm">
                 {{csrf_field()}}
