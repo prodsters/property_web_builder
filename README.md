@@ -82,4 +82,4 @@ Contribution Guideline
 
 License
 =======
-[MIT License](https://github.com/prodsters/property_web_builder/blob/master/LICENSE)
+[Apache 2.0](LICENSE)
