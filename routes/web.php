@@ -56,6 +56,9 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
     Route::match(['GET','POST'],'contents/terms-and-conditions','SiteContentsController@termsAndConditions')->name('admin.contents.terms_and_conditions');
     Route::match(['GET','POST'],'contents/contact','SiteContentsController@contact')->name('admin.contents.contact');
     Route::match(['GET','POST'],'contents/footer','SiteContentsController@footer')->name('admin.contents.footer');
+    Route::match(['GET','POST'],'contents/privacy-policy','SiteContentsController@privacyPolicy')->name('admin.contents.privacy_policy');
+    Route::match(['GET','POST'],'contents/terms','SiteContentsController@terms')->name('admin.contents.terms');
+    Route::match(['GET','POST'],'contents/social-media','SiteContentsController@socialMedia')->name('admin.contents.social_media');
 
 
 });

@@ -75,6 +75,9 @@
             <li><a href="{{route('admin.contents.terms_and_conditions')}}"><i class="fa fa-circle-o"></i> Terms and Conditions</a></li>
             <li><a href="{{route('admin.contents.contact')}}"><i class="fa fa-circle-o"></i> Contact</a></li>
             <li><a href="{{route('admin.contents.footer')}}"><i class="fa fa-circle-o"></i> Footer</a></li>
+            <li><a href="{{route('admin.contents.privacy_policy')}}"><i class="fa fa-circle-o"></i> Privacy Policy</a></li>
+            <li><a href="{{route('admin.contents.terms')}}"><i class="fa fa-circle-o"></i> Terms</a></li>
+            <li><a href="{{route('admin.contents.social_media')}}"><i class="fa fa-circle-o"></i> Social Media</a></li>
           </ul>
         </li>
       </ul>
