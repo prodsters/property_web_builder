@@ -36,7 +36,7 @@
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <table id="propertiesTable" class="table table-bordered table-striped">
+              <table id="usersTable" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>#</th>
@@ -93,7 +93,7 @@
         $("input[name='id']").val( $(this).attr("data-id") );
         eModal.confirm({message:"Are you sure you want to delete? It can't be reversed once done!", title: "Confirm", size: "sm"}).then(function() {
                 //ok button clicked
-                displayWait("#propertiesTable");
+                displayWait("#usersTable");
                 document.getElementById("deleteForm").submit();
               }, 
               function() {
