@@ -16,7 +16,10 @@
   <link rel="stylesheet" href="{{asset('assets/admin/css/AdminLTE.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('assets/admin/plugins/iCheck/square/blue.css')}}">
-
+  <script type="text/javascript">
+   var token = "{{csrf_token()}}";
+   var baseUrl = "{{url('/')}}";
+  </script>
 </head>
 <body class="hold-transition @yield('page:class')">
 

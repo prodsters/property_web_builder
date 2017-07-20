@@ -29,7 +29,11 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
 	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
 
-	//Site Settings
+    //manage users
+    Route::get('users','AdminUserController@index')->name('admin.user.index');
+    Route::post('users/delete','AdminUserController@remove')->name('admin.user.delete');
+
+    //Site Settings
     //features
     Route::get('/features','AdminFeatureController@index')->name('admin.feature.index');
     Route::match(["GET","POST"],'feature/add','AdminFeatureController@add')->name('admin.feature.add');
