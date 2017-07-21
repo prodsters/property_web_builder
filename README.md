@@ -1,6 +1,10 @@
 Property Web Builder
 ====================
-This is a ready to use Laravel based web application for creating real estate websites. 
+This is a ready to use Laravel based web application for creating real estate websites.
+ 
+ **Note that the in-progress branch contains the latest feature. However, masters branch contains the most stable updates**
+ 
+
 
 Description
 ============
