@@ -77,4 +77,59 @@ class SiteContentsController extends Controller
             return redirect()->back()->with('success','Footer content updated successfully');
         }
     }
+
+    //Privacy Policy Content
+    public function privacyPolicy(Request $request){
+        if($request->isMethod('GET')){
+            $privacy_policy=SiteContents::where(['key'=>SiteContents::CONTENT_PRIVACY_POLICY_KEY])->first();
+            return view('admin.contents.privacy_policy',compact('privacy_policy'));
+
+        }else if($request->isMethod('POST')){
+            $this->validate($request,[
+                'privacy_policy'=>'required'
+            ]);
+            $site_content=SiteContents::firstOrNew(['key'=>SiteContents::CONTENT_PRIVACY_POLICY_KEY]);
+            $site_content->value=$request->privacy_policy;
+            $site_content->save();
+
+            return redirect()->back()->with('success','Privacy Policy content updated successfully');
+        }
+    }
+
+    //Terms Content
+    public function terms(Request $request){
+        if($request->isMethod('GET')){
+            $terms=SiteContents::where(['key'=>SiteContents::CONTENT_TERMS_KEY])->first();
+            return view('admin.contents.terms',compact('terms'));
+
+        }else if($request->isMethod('POST')){
+            $this->validate($request,[
+                'terms'=>'required'
+            ]);
+            $site_content=SiteContents::firstOrNew(['key'=>SiteContents::CONTENT_TERMS_KEY]);
+            $site_content->value=$request->terms;
+            $site_content->save();
+
+            return redirect()->back()->with('success','Terms content updated successfully.');
+        }
+    }
+
+    //Social Media Account Links Content
+    public function socialMedia(Request $request){
+        if($request->isMethod('GET')){
+            $social_media=SiteContents::where(['key'=>SiteContents::CONTENT_SOCIAL_MEDIA_KEY])->first();
+            return view('admin.contents.social_media',compact('social_media'));
+
+        }else if($request->isMethod('POST')){
+            $this->validate($request,[
+                'social_media'=>'required'
+            ]);
+            $site_content=SiteContents::firstOrNew(['key'=>SiteContents::CONTENT_SOCIAL_MEDIA_KEY]);
+            $site_content->value=$request->social_media;
+            $site_content->save();
+
+            return redirect()->back()->with('success','Social Media Profile Links content updated successfully.');
+        }
+    }
 }
+
