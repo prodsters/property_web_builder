@@ -29,7 +29,11 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 	Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
 	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
 
-	//Site Settings
+    //manage users
+    Route::get('users','AdminUserController@index')->name('admin.user.index');
+    Route::post('users/delete','AdminUserController@remove')->name('admin.user.delete');
+
+    //Site Settings
     //features
     Route::get('/features','AdminFeatureController@index')->name('admin.feature.index');
     Route::match(["GET","POST"],'feature/add','AdminFeatureController@add')->name('admin.feature.add');
@@ -56,6 +60,9 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
     Route::match(['GET','POST'],'contents/terms-and-conditions','SiteContentsController@termsAndConditions')->name('admin.contents.terms_and_conditions');
     Route::match(['GET','POST'],'contents/contact','SiteContentsController@contact')->name('admin.contents.contact');
     Route::match(['GET','POST'],'contents/footer','SiteContentsController@footer')->name('admin.contents.footer');
+    Route::match(['GET','POST'],'contents/privacy-policy','SiteContentsController@privacyPolicy')->name('admin.contents.privacy_policy');
+    Route::match(['GET','POST'],'contents/terms','SiteContentsController@terms')->name('admin.contents.terms');
+    Route::match(['GET','POST'],'contents/social-media','SiteContentsController@socialMedia')->name('admin.contents.social_media');
 
 
 });
