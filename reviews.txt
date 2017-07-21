@@ -1,0 +1,36 @@
+- the site-map of the features didn't work. When adding a new
+feature or updating a feature, the 'Features' part of the top
+navigation (Home > Features > Add) links is not working. Same
+for Property Type, Property State, and Currency
+
+- Add this Instruction to the page for editing and adding new
+currency
+"Please supply the HTML Code for the currency. e.g. &#8358;
+for Nigeria naira sign"
+
+- Also, the raw HTML code for each symbol should be displayed
+when editing a particular currency.
+
+=============================
+So about the site contents
+- I will like you to design the migrations in this way:
+
+Schema::create('site_contents', function (Blueprint $table) {
+ $table->increments('id');
+ $table->text('key')->nullable();
+ $table->text('value')->nullable();
+ $table->timestamps();
+});
+
+just a key-value pair. It is more flexible that way.
+I will also like to point out that, instead of this:
+
+$about = SiteContents::where
+(['id'=>SiteContents::SITE_CONTENT_ID])->first()->value
+('about');
+
+You could have used this:
+
+$about = SiteContents::select("about")->first();
+
+make the changes and create a new PR.
