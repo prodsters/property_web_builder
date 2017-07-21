@@ -143,7 +143,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="{{asset('assets/admin/img/avatar5.png')}}" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs">{{ Auth::user()->first_name.' '.Auth::user()->last_name}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -151,7 +151,7 @@
                 <img src="{{asset('assets/admin/img/avatar5.png')}}" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
+                  {{ Auth::user()->first_name.' '.Auth::user()->last_name}} - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>

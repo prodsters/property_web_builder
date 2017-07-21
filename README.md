@@ -1,6 +1,10 @@
 Property Web Builder
 ====================
-This is a ready to use Laravel based web application for creating real estate websites. 
+This is a ready to use Laravel based web application for creating real estate websites.
+ 
+ **Note that the in-progress branch contains the latest feature. However, masters branch contains the most stable updates**
+ 
+
 
 **The most up-to-date feature is available in the in-progress branch.**
 
@@ -38,12 +42,11 @@ Front-End
 Admin-End
 ---------
 - Dashboard/Statistics
-- Edit Site Contents: About, Contact, Privacy Policy, Terms, Socil Media Account Links
 - Edit Home Page Contents
+- Edit Site Contents: Privacy Policy, Terms, Social Media Account Links. The database migration has been created
+  for this already. Just follow the existing style to implement your additions. 
+  The controller is `SiteContentsController.php`
 - Manage Users from the Backend
-- Site Settings: Features, Property Types, Property States, and Currency. The database table/migration 
-for these has been designed already. All is needed is a CRUD for each of them.
-- Site Contents: No migration has been created for this. So you will have to create a common table for the site contents
 
 
 Features IMPLEMENTED
@@ -55,6 +58,9 @@ Admin-End
 - Adding of Properties
 - Editing/Updating of Properties with photos, location and property features
 - Database Migrations and Seeder
+- Site Content: About, Contact, Terms and Conditions and Footer.
+- Site Settings: Features, Property Types, Property States, and Currency.
+
 
 Front-End
 ---------
@@ -83,4 +89,4 @@ Contribution Guideline
 
 License
 =======
-[MIT License](https://github.com/prodsters/property_web_builder/blob/master/LICENSE)
+[Apache 2.0](LICENSE)
