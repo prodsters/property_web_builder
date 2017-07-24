@@ -38,7 +38,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="user-panel">
-                                    <img src="http://localhost:8000/assets/admin/img/avatar5.png" class="img-circle" alt="User Image">
+                                    <img src="{{$user->profile_pic? : 'http://localhost:8000/assets/admin/img/avatar5.png'}}" class="img-circle" alt="User Image">
                                 </div>
                             </div>
                             <div class="col-sm-8">
