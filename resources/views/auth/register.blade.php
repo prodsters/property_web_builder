@@ -17,7 +17,11 @@
       {{csrf_field()}}
 
       <div class="form-group has-feedback">
-        <input type="text" class="form-control" placeholder="Full name" name="name" value="{{ old('name') }}" required>
+        <input type="text" class="form-control" placeholder="First Name" name="first_name" value="{{ old('first_name') }}" required>
+        <span class="glyphicon glyphicon-user form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="text" class="form-control" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}" required>
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">

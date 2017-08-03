@@ -12,7 +12,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Admin Dashboard
+        @if(Auth::user()->is_admin)SuperAdmin @else Admin @endif Dashboard
       </h1>
       <ol class="breadcrumb">
         <li class="active">Dashboard</li>

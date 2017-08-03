@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class SiteContentsController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
     //About content
     public function about(Request $request){
         if($request->isMethod('GET')){

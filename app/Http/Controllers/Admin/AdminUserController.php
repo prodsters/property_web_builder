@@ -7,9 +7,18 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+/*
+ * This class is used to control other admins that can post properties
+ * it is meant for super-admins
+ * */
 class AdminUserController extends Controller
 {
-	public function index(){
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
+    public function index(){
         return view('admin.user.index',['users'=>User::all()]);
     }
 

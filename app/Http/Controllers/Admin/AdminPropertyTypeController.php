@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class AdminPropertyTypeController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
     public function index(){
         return view('admin.property_type.index',['property_types'=>PropertyType::all()]);
     }

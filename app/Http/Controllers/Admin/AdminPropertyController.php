@@ -32,7 +32,12 @@ class AdminPropertyController extends Controller
     * it will list all the properties
     */
     public function index() {
-        return view("admin.property.index", ["properties" => Property::all()]);
+        if(Auth::user()->is_admin) {
+            $property = Property::all();
+        } else {
+            $property = Property::where("user_id", Auth::id())->latest()->get();
+        }
+        return view("admin.property.index", ["properties" => $property]);
     }
 
     /**
