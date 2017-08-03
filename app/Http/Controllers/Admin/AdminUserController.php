@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -9,7 +10,7 @@ use App\Http\Controllers\Controller;
 class AdminUserController extends Controller
 {
 	public function index(){
-        return view('admin.user.index',['users'=>User::all()]);
+        return view('admin.user.index',['users'=>User::where('id', '!=', Auth::user()->id)->get()]);
     }
 
     public function remove(Request $request){
@@ -27,5 +28,10 @@ class AdminUserController extends Controller
                 return redirect()->back()->with("error", "Something went wrong. Try again...");
             }
         }
+    }
+
+    public function show(User $user)
+    {
+        return view('admin.user.user', compact('user'));
     }
 }

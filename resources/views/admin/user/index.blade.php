@@ -58,7 +58,8 @@
                   <td>{{$user->last_name}}</td>
                   <td>{{$user->email}}</td>
                   <td>
-                  	<a class="btn btn-xs btn-danger del" data-id="{{$user->id}}" href="#">DEL</a>
+                    <a class="btn btn-xs btn-danger del" data-id="{{$user->id}}" href="#">DEL</a>
+                  	<a class="btn btn-xs btn-primary view" data-id="{{$user->id}}" href="{{ route('admin.user.show', $user) }}">VIEW</a>
                   </td>
                 </tr>
                 @endforeach
@@ -84,24 +85,24 @@
 <script src="{{asset('assets/admin/plugins/datatables/dataTables.bootstrap.min.js')}}"></script>
 <script type="text/javascript">
 	$(function () {
-    $('#propertiesTable').DataTable({
-      "paging": true,
+        $('#propertiesTable').DataTable({
+          "paging": true,
+        });
+
+        $(document).on("click", ".del", function() {
+            
+            $("input[name='id']").val( $(this).attr("data-id") );
+            eModal.confirm({message:"Are you sure you want to delete? It can't be reversed once done!", title: "Confirm", size: "sm"}).then(function() {
+                    //ok button clicked
+                    displayWait("#usersTable");
+                    document.getElementById("deleteForm").submit();
+                  }, 
+                  function() {
+                    //cancel bt clicked
+                    //do nothing;
+                  });
+        }); 
+
     });
-
-    $(document).on("click", ".del", function() {
-        
-        $("input[name='id']").val( $(this).attr("data-id") );
-        eModal.confirm({message:"Are you sure you want to delete? It can't be reversed once done!", title: "Confirm", size: "sm"}).then(function() {
-                //ok button clicked
-                displayWait("#usersTable");
-                document.getElementById("deleteForm").submit();
-              }, 
-              function() {
-                //cancel bt clicked
-                //do nothing;
-              });
-    }); 
-
-  });
 </script>
 @endsection
