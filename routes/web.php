@@ -14,23 +14,24 @@
 
 Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["auth"] ], function () {
 
-	Route::get("dashboard", "AdminDashboardController@index")->name("admin.dashboard.index");
+    Route::get("dashboard", "AdminDashboardController@index")->name("admin.dashboard.index");
 
-	//properties
-	Route::get("/properties", "AdminPropertyController@index")->name("admin.property.index");
-	Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
-	Route::post("/property/delete", "AdminPropertyController@deleteProperty")->name("admin.property.delete");
-	
-	Route::post("/property/image/add", "AdminPropertyController@addPhoto")->name("admin.property.upload");
-	Route::post("/property/image/delete", "AdminPropertyController@deletePhoto")->name("admin.property.delete.photo");
-	Route::post("/property/update/location", "AdminPropertyController@updateLocation")->name("admin.property.update.location");
-	Route::post("/property/update/details", "AdminPropertyController@updateBasicDetails")->name("admin.property.update.details");
-	Route::post("/property/update/pricing", "AdminPropertyController@updatePricing")->name("admin.property.update.pricing");
-	Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
-	Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
+    //properties
+    Route::get("/properties", "AdminPropertyController@index")->name("admin.property.index");
+    Route::match(["GET", "POST"], "property/add", "AdminPropertyController@add")->name("admin.property.add");
+    Route::post("/property/delete", "AdminPropertyController@deleteProperty")->name("admin.property.delete");
+    
+    Route::post("/property/image/add", "AdminPropertyController@addPhoto")->name("admin.property.upload");
+    Route::post("/property/image/delete", "AdminPropertyController@deletePhoto")->name("admin.property.delete.photo");
+    Route::post("/property/update/location", "AdminPropertyController@updateLocation")->name("admin.property.update.location");
+    Route::post("/property/update/details", "AdminPropertyController@updateBasicDetails")->name("admin.property.update.details");
+    Route::post("/property/update/pricing", "AdminPropertyController@updatePricing")->name("admin.property.update.pricing");
+    Route::post("/property/update/features", "AdminPropertyController@addFeatures")->name("admin.property.update.features");
+    Route::match(["GET", "POST"], "property/edit/{id}", "AdminPropertyController@edit")->name("admin.property.edit");
 
     //manage users
     Route::get('users','AdminUserController@index')->name('admin.user.index');
+    Route::get('users/{user}','AdminUserController@show')->name('admin.user.show');
     Route::post('users/delete','AdminUserController@remove')->name('admin.user.delete');
 
     //Site Settings
