@@ -2,15 +2,24 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Auth;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
+/*
+ * This class is used to control other admins that can post properties
+ * it is meant for super-admins
+ * */
 class AdminUserController extends Controller
 {
-	public function index(){
-        return view('admin.user.index',['users'=>User::where('id', '!=', Auth::user()->id)->get()]);
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
+    public function index(){
+        return view('admin.user.index',['users'=>User::all()]);
     }
 
     public function remove(Request $request){
@@ -19,7 +28,10 @@ class AdminUserController extends Controller
             if(is_null($user)) {
                 return redirect()->back()->with("error", "User Not Found");
             }
-            // $feature_name=$feature->name;
+
+            if(Auth::id() == $user->id) {
+                return redirect()->back()->with("error", "Though shall not delete yourself, oh son of man!");
+            }
 
             $result=$user->delete();
             if($result){

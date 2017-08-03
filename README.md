@@ -11,9 +11,10 @@ This is a ready to use Laravel based web application for creating real estate we
 
 Description
 ============
-This is a real estate web application that agents and agencies can use to list available properties. 
+This is a drop-in real estate web application that agents and agencies can use to list available properties. 
 This project is inspired by [etewiah's project](https://github.com/etewiah/property_web_builder) which was created with Ruby on Rails
-
+It has multi-tenancy built into it. It can easily be used to manage two different group of users with different permission level. 
+  
 How to use
 ==========
 - Clone this repo
@@ -42,11 +43,8 @@ Front-End
 Admin-End
 ---------
 - Dashboard/Statistics
+    - A bar chart of different types of properties available on listing and their quantity
 - Edit Home Page Contents
-- Edit Site Contents: Privacy Policy, Terms, Social Media Account Links. The database migration has been created
-  for this already. Just follow the existing style to implement your additions. 
-  The controller is `SiteContentsController.php`
-- Manage Users from the Backend
 
 
 Features IMPLEMENTED
@@ -58,9 +56,11 @@ Admin-End
 - Adding of Properties
 - Editing/Updating of Properties with photos, location and property features
 - Database Migrations and Seeder
-- Site Content: About, Contact, Terms and Conditions and Footer.
+- Site Content: About, Contact, Terms and Conditions, Footer, Privacy Policy, and Social Media Account Links.
 - Site Settings: Features, Property Types, Property States, and Currency.
-
+- Manage Users from the Backend - by Admin alone
+- Super-Admin Access Control
+- Other Users can just post properties alone 
 
 Front-End
 ---------

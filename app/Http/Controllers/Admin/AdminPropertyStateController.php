@@ -8,6 +8,10 @@ use App\Http\Controllers\Controller;
 
 class AdminPropertyStateController extends Controller
 {
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
     public function index(){
         return view('admin.property_state.index',['property_states'=>PropertyState::all()]);
     }

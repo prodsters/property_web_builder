@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class AdminFeatureController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
     public function index(){
         return view('admin.feature.index',['features'=>Feature::all()]);
     }

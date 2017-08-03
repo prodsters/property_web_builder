@@ -8,6 +8,11 @@ use App\Http\Controllers\Controller;
 
 class AdminCurrencyController extends Controller
 {
+
+    public function __construct() {
+        $this->middleware("systemadmin");
+    }
+
     public function index(){
         return view('admin.currency.index',['currencies'=>Currency::all()]);
     }

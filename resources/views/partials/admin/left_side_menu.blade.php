@@ -40,7 +40,8 @@
             </li>
           </ul>
         </li>
-        <li class="header">USERS</li>
+        @if(Auth::user()->is_admin)
+        <li class="header">SUPER-ADMIN</li>
         <li class="treeview">
           <a href="{{route('admin.user.index')}}">
             <i class="fa fa-users"></i> <span>Manage Users</span>
@@ -79,6 +80,13 @@
             <li><a href="{{route('admin.contents.terms')}}"><i class="fa fa-circle-o"></i> Terms</a></li>
             <li><a href="{{route('admin.contents.social_media')}}"><i class="fa fa-circle-o"></i> Social Media</a></li>
           </ul>
+        </li>
+        @endif
+        <li class="header">OPEN SOURCE</li>
+        <li class="treeview">
+          <a href="https://github.com/prodsters/property_web_builder" target="_blank">
+            <i class="fa fa-github"></i> <span>Source Code</span>
+          </a>
         </li>
       </ul>
     </section>
