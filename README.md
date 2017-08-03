@@ -40,10 +40,6 @@ Admin-End
 ---------
 - Dashboard/Statistics
 - Edit Home Page Contents
-- Edit Site Contents: Privacy Policy, Terms, Social Media Account Links. The database migration has been created
-  for this already. Just follow the existing style to implement your additions. 
-  The controller is `SiteContentsController.php`
-- Manage Users from the Backend
 
 
 Features IMPLEMENTED
@@ -55,8 +51,9 @@ Admin-End
 - Adding of Properties
 - Editing/Updating of Properties with photos, location and property features
 - Database Migrations and Seeder
-- Site Content: About, Contact, Terms and Conditions and Footer.
+- Site Content: About, Contact, Terms and Conditions, Footer, Privacy Policy, and Social Media Account Links.
 - Site Settings: Features, Property Types, Property States, and Currency.
+- Manage Users from the Backend
 
 
 Front-End

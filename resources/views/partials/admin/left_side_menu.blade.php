@@ -80,6 +80,12 @@
             <li><a href="{{route('admin.contents.social_media')}}"><i class="fa fa-circle-o"></i> Social Media</a></li>
           </ul>
         </li>
+        <li class="header">OPEN SOURCE</li>
+        <li class="treeview">
+          <a href="https://github.com/prodsters/property_web_builder" target="_blank">
+            <i class="fa fa-github"></i> <span>Source Code</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->
