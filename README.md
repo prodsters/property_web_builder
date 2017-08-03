@@ -11,7 +11,7 @@ Description
 This is a drop-in real estate web application that agents and agencies can use to list available properties. 
 This project is inspired by [etewiah's project](https://github.com/etewiah/property_web_builder) which was created with Ruby on Rails
 It has multi-tenancy built into it. It can easily be used to manage two different group of users with different permission level. 
-
+  
 How to use
 ==========
 - Clone this repo
