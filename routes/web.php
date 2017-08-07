@@ -68,9 +68,7 @@ Route::group(['namespace' => "Admin", "prefix" => "admin", "middleware" => ["aut
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('front.index');
+include "front.php";
 
 Auth::routes();
 
