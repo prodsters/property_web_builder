@@ -72,4 +72,3 @@ include "front.php";
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
