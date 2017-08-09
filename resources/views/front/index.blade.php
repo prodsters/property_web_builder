@@ -1,65 +1,7 @@
-<!--
-author: W3layouts
-author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Tenements a Real Estate Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
-    <!-- custom-theme -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="keywords" content="Tenements Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
-Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-        function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <!-- //custom-theme -->
-    <link href="{{asset('assets/front/css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <link href="{{asset('assets/front/css/style.css')}}" rel="stylesheet" type="text/css" media="all" />
-    <!-- //js -->
-    <link rel="stylesheet" type="text/css" href="{{asset('assets/front/css/jquery-ui1.css')}}">
+@extends("layouts.front")
 
-    <!-- font-awesome-icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
 
-    <!-- //font-awesome-icons -->
-    <link href="//fonts.googleapis.com/css?family=Oswald:300,400,700&amp;subset=latin-ext" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic,800,800italic' rel='stylesheet' type='text/css'>
-</head>
-
-<body>
-<!-- header -->
-<div class="header">
-    <div class="container">
-        <div class="w3_agile_logo">
-            <h1><a href="#"><span>P</span>roperty <span>W</span>eb <span>B</span>uilder</a></h1>
-        </div>
-        <div class="agile_header_social">
-            <ul class="agileits_social_list">
-                <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
-            </ul>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-</div>
-
-<div class="header_address_mail">
-    <div class="container">
-        <div class="agileits_w3layouts_header_address_grid">
-            <ul>
-                <li><a href="mailto:info@example.com">info@example.com</a></li>
-                <li><i class="fa fa-phone" aria-hidden="true"></i></li>
-                <li>+(000) 123 234 22</li>
-            </ul>
-        </div>
-    </div>
-</div>
-<!-- header -->
+@section('content')
 <!-- banner -->
 <div class="banner">
     <div class="container">
@@ -87,6 +29,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </ul>
                         </li>
                         <li><a href="mail.html"><span>Mail Us</span></a></li>
+                        @if(!Auth::check())
+                            <li><a href="{{ url('/login') }}"><span>Register/Log In</span></a></li>
+                        @else
+                            <li>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                    <span>Log Out</span>
+                                </a>
+                            </li>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                {{ csrf_field() }}
+                            </form>
+                        @endif
                     </ul>
                     <div class="w3_agileits_search_form">
                         <form action="#" method="post">
@@ -315,7 +270,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     {{--</div>--}}
 {{--</div>--}}
 {{--<!-- //skills -->--}}
-<!-- footer -->
 <div class="newsletter">
     <div class="container">
         <div class="w3layouts_header w3_agile_head">
@@ -363,69 +317,5 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"> </div>
         </div>
     </div>
-    <div class="w3l_footer_pos">
-        <p>© 2017 Tenements. All Rights Reserved | Design by <a href="https://w3layouts.com/">W3layouts</a></p>
-        <div class="w3ls_newsletter_social">
-            <ul class="agileits_social_list">
-                <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
-            </ul>
-        </div>
-    </div>
 </div>
-<!-- //footer -->
-<!-- jQuery 2.2.3 -->
-<script src="{{asset('assets/admin/plugins/jQuery/jquery-2.2.3.min.js')}}"></script>
-<!-- Bootstrap 3.3.6 -->
-<script src="{{asset('assets/admin/bootstrap/js/bootstrap.min.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/jquery-ui.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/move-top.js')}}"></script>
-<script type="text/javascript" src="{{asset('assets/front/js/easing.js')}}"></script>
-
-<script type='text/javascript'>//<![CDATA[
-    $(window).load(function(){
-        $( "#slider-range" ).slider({
-            range: true,
-            min: 0,
-            max: 900,
-            values: [ 50, 600 ],
-            slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
-            }
-        });
-        $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
-
-    });//]]>
-</script>
-<!-- //range -->
-<!-- start-smooth-scrolling -->
-<script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $(".scroll").click(function(event){
-            event.preventDefault();
-            $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-        });
-    });
-</script>
-<!-- start-smooth-scrolling -->
-<!-- here stars scrolling icon -->
-
-<script type="text/javascript">
-    $(document).ready(function() {
-        /*
-         var defaults = {
-         containerID: 'toTop', // fading element id
-         containerHoverID: 'toTopHover', // fading element hover id
-         scrollSpeed: 1200,
-         easingType: 'linear'
-         };
-         */
-
-        $().UItoTop({ easingType: 'easeOutQuart' });
-
-    });
-</script>
-<!-- //here ends scrolling icon -->
-</body>
-</html>
+@stop
