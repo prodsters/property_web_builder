@@ -6,6 +6,17 @@
 <link rel="stylesheet" type="text/css" href="{{asset('assets/front/css/flexisel.css')}}">
 @endsection
 @section("content")
+<div class="header_address_mail" style="background: #fff;text-align:left;">
+    <div class="container">
+        <div class="agileits_w3layouts_header_address_grid" style="float:left;">
+            <ul>
+                <li style="color:#000;text-align:justify;">
+                    <button id="searchBt" class="btn btn-lg"><span class="fa fa-search-plus"></span> Find Property</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="services">
     <div class="container">
         <div class="w3layouts_header">
@@ -42,6 +53,7 @@
         </div>
     </div>
 </div>
+@include("partials.search-modal")
 @endsection
 @section("page:scripts")
     <script type="text/javascript" src="{{asset('assets/front/js/jquery.flexisel.js')}}"></script>

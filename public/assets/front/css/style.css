@@ -2552,3 +2552,10 @@ h2.typoh2{
 		padding: 1em 0 0;
 	}
 }
+
+/*mine*/
+#searchBt {
+    border: 1px solid #000;
+    border-radius: 0px;
+    background-color: #ffffff;
+}

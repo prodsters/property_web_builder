@@ -2,6 +2,19 @@
 @extends("layouts.front")
 @section("banner-class", "banner1")
 @section("content")
+
+    <div class="header_address_mail" style="background: #fff;text-align:left;">
+        <div class="container">
+            <div class="agileits_w3layouts_header_address_grid" style="float:left;">
+                <ul>
+                    <li style="color:#000;text-align:justify;">
+                        <button id="searchBt" class="btn btn-lg"><span class="fa fa-search-plus"></span> Find Property</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
 <!-- properties -->
 <div class="services">
     <div class="container">
@@ -40,4 +53,5 @@
     </div>
 </div>
 <!-- //properties -->
+  @include("partials.search-modal")
 @endsection

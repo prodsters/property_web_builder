@@ -34,7 +34,7 @@
 <div class="header">
     <div class="container">
         <div class="w3_agile_logo">
-            <h1><a href="#"><span>P</span>roperty <span>W</span>eb <span>B</span>uilder</a></h1>
+            <h1><a href="{{route('front.index')}}"><span>P</span>roperty <span>W</span>eb <span>B</span>uilder</a></h1>
         </div>
         <div class="agile_header_social">
             <ul class="agileits_social_list">
@@ -60,6 +60,7 @@
     </div>
 </div>
 <!-- header -->
+
 <!-- banner -->
 <div class="@yield("banner-class")">
     <div class="container">
@@ -95,18 +96,14 @@
                             </form>
                         @endif
                     </ul>
-                    <div class="w3_agileits_search_form">
-                        <form action="#" method="post">
-                            <input type="search" name="Search" placeholder="Search" required="">
-                            <input type="submit" value=" ">
-                        </form>
-                    </div>
                 </nav>
             </div>
         </nav>
     </div>
 </div>
 <!-- //banner -->
+
+
 
 @yield('content')
 
@@ -133,6 +130,8 @@
 <script type="text/javascript" src="{{asset('assets/front/js/easing.js')}}"></script>
 
 @yield("page:scripts")
+
+
 
 </body>
 </html>
