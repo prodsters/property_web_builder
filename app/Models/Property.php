@@ -15,4 +15,16 @@ class Property extends Model
     public function author() {
     	return $this->belongsTo(User::class);
     }
+
+    public function type() {
+        return $this->hasOne(PropertyType::class, "id", "type_id");
+    }
+
+    public function state() {
+        return $this->hasOne(PropertyState::class, "id", "type_id");
+    }
+
+    public function currency() {
+        return $this->hasOne(Currency::class, "id", "currency_id");
+    }
 }

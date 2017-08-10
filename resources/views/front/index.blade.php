@@ -1,60 +1,7 @@
+<?php $active = "home"; ?>
 @extends("layouts.front")
-
-
+@section("banner-class", "banner")
 @section('content')
-<!-- banner -->
-<div class="banner">
-    <div class="container">
-        <nav class="navbar navbar-default">
-            <div class="navbar-header navbar-left">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
-                <nav class="link-effect-12">
-                    <ul class="nav navbar-nav w3_agile_nav">
-                        <li class="active"><a href="index.html"><span>Home</span></a></li>
-                        <li><a href="properties.html"><span>Properties</span></a></li>
-                        <li><a href="about.html"><span>About Us</span></a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span data-hover="Short Codes">Short Codes</span> <b class="caret"></b></a>
-                            <ul class="dropdown-menu agile_short_dropdown">
-                                <li><a href="icons.html">Web Icons</a></li>
-                                <li><a href="typography.html">Typography</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="mail.html"><span>Mail Us</span></a></li>
-                        @if(!Auth::check())
-                            <li><a href="{{ url('/login') }}"><span>Register/Log In</span></a></li>
-                        @else
-                            <li>
-                                <a href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    <span>Log Out</span>
-                                </a>
-                            </li>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                {{ csrf_field() }}
-                            </form>
-                        @endif
-                    </ul>
-                    <div class="w3_agileits_search_form">
-                        <form action="#" method="post">
-                            <input type="search" name="Search" placeholder="Search" required="">
-                            <input type="submit" value=" ">
-                        </form>
-                    </div>
-                </nav>
-            </div>
-        </nav>
-    </div>
-</div>
-<!-- //banner -->
 <!-- banner-bottom -->
 <div class="banner-bottom">
     <div class="container">
@@ -123,7 +70,7 @@
     <div class="container">
         <div class="w3layouts_header">
             <p><span><i class="fa fa-key" aria-hidden="true"></i></span></p>
-            <h5>Our <span>Services</span></h5>
+            <h5>Curated <span>Properties</span></h5>
         </div>
         <div class="w3_services_grids">
             <div class="col-md-4 w3l_services_grid">
@@ -136,8 +83,9 @@
                     </div>
                 </div>
                 <div class="wthree_service_text">
-                    <h3>2 Bedroom house for rent</h3>
-                    <h4 class="w3_agileits_service">Reality Agency</h4>
+                    <h3>Properties For Rent</h3>
+                    <small>There are 20 properties for rent starting from $300</small>
+                    <h4 class="w3_agileits_service">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -158,8 +106,9 @@
                     </div>
                 </div>
                 <div class="wthree_service_text">
-                    <h3>High rise Buildings for rent</h3>
-                    <h4 class="w3_agileits_service2">Reality Agency</h4>
+                    <h3>Properties for sale</h3>
+                    <small>There are 20 properties for sale starting from $300</small>
+                    <h4 class="w3_agileits_service2">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -180,8 +129,9 @@
                     </div>
                 </div>
                 <div class="wthree_service_text">
-                    <h3>Big luxury house for rent</h3>
-                    <h4 class="w3_agileits_service1">Reality Agency</h4>
+                    <h3>Lands</h3>
+                    <small>There are 20 pieces of land for sale starting from $700</small>
+                    <h4 class="w3_agileits_service1">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -202,7 +152,7 @@
                     </div>
                 </div>
                 <div class="wthree_service_text">
-                    <h3>Low rise Buildings for rent</h3>
+                    <h3>Featured Property</h3>
                     <h4 class="w3_agileits_service3">Reality Agency</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -224,7 +174,7 @@
                     </div>
                 </div>
                 <div class="wthree_service_text">
-                    <h3>Low rise Buildings for rent</h3>
+                    <h3>Highly Featured Property</h3>
                     <h4 class="w3_agileits_service4">Reality Agency</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -241,35 +191,6 @@
     </div>
 </div>
 <!-- //services -->
-{{--<!-- skills -->--}}
-{{--<div class="skills">--}}
-    {{--<div class="container">--}}
-        {{--<div class="w3layouts_header w3_agile_head">--}}
-            {{--<p><span><i class="fa fa-bullseye" aria-hidden="true"></i></span></p>--}}
-            {{--<h5>Our <span>Skills</span></h5>--}}
-        {{--</div>--}}
-        {{--<div class="w3layouts_skills_grids">--}}
-            {{--<div class="col-md-3 w3ls_about_guage">--}}
-                {{--<h4>Make Money</h4>--}}
-                {{--<canvas id="gauge1" width="200" height="100"></canvas>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-3 w3ls_about_guage">--}}
-                {{--<h4>Matching Buyer</h4>--}}
-                {{--<canvas id="gauge2" width="200" height="100"></canvas>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-3 w3ls_about_guage">--}}
-                {{--<h4>Market Appraisals</h4>--}}
-                {{--<canvas id="gauge3" width="200" height="100"></canvas>--}}
-            {{--</div>--}}
-            {{--<div class="col-md-3 w3ls_about_guage">--}}
-                {{--<h4>Support</h4>--}}
-                {{--<canvas id="gauge4" width="200" height="100"></canvas>--}}
-            {{--</div>--}}
-            {{--<div class="clearfix"> </div>--}}
-        {{--</div>--}}
-    {{--</div>--}}
-{{--</div>--}}
-{{--<!-- //skills -->--}}
 <div class="newsletter">
     <div class="container">
         <div class="w3layouts_header w3_agile_head">
@@ -318,4 +239,50 @@
         </div>
     </div>
 </div>
-@stop
+@endsection
+@section("page:scripts")
+    <script type='text/javascript'>//<![CDATA[
+        $(window).load(function(){
+            $( "#slider-range" ).slider({
+                range: true,
+                min: 0,
+                max: 900,
+                values: [ 50, 600 ],
+                slide: function( event, ui ) {  $( "#amount" ).val( "$" + ui.values[ 0 ] + " - $" + ui.values[ 1 ] );
+                }
+            });
+            $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) + " - $" + $( "#slider-range" ).slider( "values", 1 ) );
+
+        });//]]>
+    </script>
+    <!-- //range -->
+    <!-- start-smooth-scrolling -->
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $(".scroll").click(function(event){
+                event.preventDefault();
+                $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
+            });
+        });
+    </script>
+    <!-- start-smooth-scrolling -->
+    <!-- here stars scrolling icon -->
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            /*
+             var defaults = {
+             containerID: 'toTop', // fading element id
+             containerHoverID: 'toTopHover', // fading element hover id
+             scrollSpeed: 1200,
+             easingType: 'linear'
+             };
+             */
+
+            $().UItoTop({ easingType: 'easeOutQuart' });
+
+        });
+    </script>
+    <!-- //here ends scrolling icon -->
+
+@endsection
