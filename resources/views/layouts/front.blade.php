@@ -38,10 +38,8 @@
         </div>
         <div class="agile_header_social">
             <ul class="agileits_social_list">
-                <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
+                <li><a href="https://facebook.com/prodsters" target="_blank" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/prodsters" target="_blank" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
             </ul>
         </div>
         <div class="clearfix"> </div>
@@ -52,9 +50,9 @@
     <div class="container">
         <div class="agileits_w3layouts_header_address_grid">
             <ul>
-                <li><a href="mailto:info@example.com">info@example.com</a></li>
+                <li><a href="mailto:hello@prodsters.com">hello[at]prodsters.com</a></li>
                 <li><i class="fa fa-phone" aria-hidden="true"></i></li>
-                <li>+(234) 123 234 22</li>
+                <li>(+234) 08109276123</li>
             </ul>
         </div>
     </div>
@@ -110,13 +108,11 @@
 <!-- footer -->
 <div class="newsletter">
     <div class="w3l_footer_pos">
-        <p>© 2017 Tenements. All Rights Reserved | Design by <a href="https://w3layouts.com/">W3layouts</a></p>
+        <p>© <?php echo date('Y'); ?> Prodsters. All Rights Reserved | Design base by <a href="https://w3layouts.com/">W3layouts</a></p>
         <div class="w3ls_newsletter_social">
             <ul class="agileits_social_list">
-                <li><a href="#" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_dribble"><i class="fa fa-dribbble" aria-hidden="true"></i></a></li>
-                <li><a href="#" class="w3_agile_vimeo"><i class="fa fa-vimeo" aria-hidden="true"></i></a></li>
+                <li><a href="https://facebook.com/prodsters" target="_blank" class="w3_agile_facebook"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="https://twitter.com/prodsters" target="_blank" class="agile_twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
             </ul>
         </div>
     </div>

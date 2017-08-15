@@ -6,8 +6,7 @@
 <div class="banner-bottom">
     <div class="container">
         <div class="col-md-6 w3layouts_banner_bottom_left">
-            <h3>real estate investing, even on a very small scale, remains a tried and true
-                means of building an individual's cash flow and wealth</h3>
+            <h3>Find your dream Property. A Place your heart long for. Affordable properties for all</h3>
         </div>
         <div class="clearfix"> </div>
         <div class="w3_banner_bottom_pos">
@@ -212,7 +211,7 @@
                 </div>
                 <div class="w3ls_footer_grid_leftr">
                     <h4>Location</h4>
-                    <p>3481 Melrose Place, EF23 Beverly Hills, New York City, USA 90210.</p>
+                    <p>Commercial Avenue, Sabo, Yaba, Lagos, Nigeria.</p>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -222,7 +221,7 @@
                 </div>
                 <div class="w3ls_footer_grid_leftr">
                     <h4>Email</h4>
-                    <a href="mailto:info@example.com">info@example.com</a>
+                    <a href="mailto:hello@prodsters.com">hello[at]prodsters.com</a>
                 </div>
                 <div class="clearfix"> </div>
             </div>
@@ -232,7 +231,7 @@
                 </div>
                 <div class="w3ls_footer_grid_leftr">
                     <h4>Call Us</h4>
-                    <p>(+000) 123 4571 121</p>
+                    <p>(+234) 08109276123, (+234) 08088020249</p>
                 </div>
                 <div class="clearfix"> </div>
             </div>
