@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Models\Property;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 {
@@ -45,5 +46,24 @@ class HomeController extends Controller
         }
 
         return view("front.properties.view", ["property" => $property]);
+    }
+
+    public function propertiesByType($type) {
+        $properties = null;
+
+
+        if($type == "sale") {
+            $properties = Property::where([ ["is_public", true], ["sale", true] ])->latest()->get()->toArray();
+            $type = "For Sale";
+        }
+        if($type == "rent") {
+            $type = "For Rent";
+            $properties = Property::where([ ["is_public", true], ["rental", true] ])->latest()->get()->toArray();
+        }
+
+//        Log::info("properties");
+//        Log::info($properties);
+
+        return view("front.properties.index", ["properties" => $properties, "type" => $type]);
     }
 }

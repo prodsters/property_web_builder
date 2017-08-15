@@ -73,10 +73,11 @@
             <h5>Curated <span>Properties</span></h5>
         </div>
         <div class="w3_services_grids">
-            <div class="col-md-4 w3l_services_grid">
+            <a href="{{route('front.properties.type', ['type' => 'rent'])}}">
+                <div class="col-md-4 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid">
                     <div class="agile_services_grid1_sub">
-                        <p>$ 32,000</p>
+                        <p>For Rent</p>
                     </div>
                     <div class="agileinfo_services_grid_pos">
                         <i class="fa fa-user-o" aria-hidden="true"></i>
@@ -96,10 +97,12 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-md-4 w3l_services_grid">
+            </a>
+            <a href="{{route('front.properties.type', ['type'=>'sale'])}}">
+                <div class="col-md-4 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid2">
                     <div class="agile_services_grid1_sub agileits_w3layouts_ser_sub1">
-                        <p>$ 12,000</p>
+                        <p>For Sale</p>
                     </div>
                     <div class="agileinfo_services_grid_pos agile_services_grid_pos1">
                         <i class="fa fa-bath" aria-hidden="true"></i>
@@ -119,6 +122,8 @@
                     </ul>
                 </div>
             </div>
+            </a>
+
             <div class="col-md-4 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid1">
                     <div class="agile_services_grid1_sub agileits_w3layouts_ser_sub">
@@ -142,6 +147,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="col-md-6 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid3">
                     <div class="agile_services_grid1_sub agileits_w3layouts_ser_sub2">
@@ -164,6 +170,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="col-md-6 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid4">
                     <div class="agile_services_grid1_sub agileits_w3layouts_ser_sub3">
@@ -186,6 +193,7 @@
                     </ul>
                 </div>
             </div>
+
             <div class="clearfix"> </div>
         </div>
     </div>

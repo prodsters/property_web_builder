@@ -77,6 +77,6 @@
             $("#searchModal").modal();
         });
 
-        $("#searchModal").modal();
+//        $("#searchModal").modal();
     });
 </script>
