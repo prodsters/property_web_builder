@@ -13,7 +13,7 @@ class Property extends Model
     protected $guarded = [];
 
     public function author() {
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(User::class, "user_id", "id");
     }
 
     public function type() {

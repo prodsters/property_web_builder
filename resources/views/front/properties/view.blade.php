@@ -28,7 +28,7 @@
             <div class="col-sm-offset-1 col-sm-6">
                 <p>{{$property->description}}</p>
                 <hr>
-                <p><strong>Location:</strong> {{$property->street_address}}, {{$property->city}}, {{$property->coun}}</p>
+                <p><strong>Location:</strong> {{$property->street_address}}, {{$property->city}}, {{$property->country}}</p>
                 <br>
                 @if($property->sale)
                   <p><strong>Current Selling Price:</strong> {{$property->currency->symbol}} {{$property->current_selling_price}}</p>
@@ -41,6 +41,16 @@
                 <p><strong>State:</strong> {{$property->state->state}} | <strong>Type:</strong> {{$property->type->type}}</p>
                 <br>
                 <p><span class="fa fa-bath"></span> {{$property->bathroom_count}} | <span class="fa fa-bed"></span> {{$property->bedroom_count}} | <span class="fa fa-car"></span> {{$property->garage_count}}</p>
+                <br>
+                <p><a href="#" id="viewAgentContact" onclick="javascript: event.preventDefault(); $('#agc').show();">View Agent's Contact</a></p>
+                <br>
+                <div id="agc" style="display: none;">
+                    <h4>You can reach the Agent for this property via:</h4>
+                    <br>
+                    <p><span class="fa fa-headphones"></span> {{$property->author['phone']}} </p>
+                    <br>
+                    <p><span class="fa fa-envelope"></span> {{$property->author['email']}} </p>
+                </div>
             </div>
             <div class="col-sm-4">
                 <ul id="pictures">

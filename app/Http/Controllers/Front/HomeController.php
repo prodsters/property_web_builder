@@ -31,7 +31,7 @@ class HomeController extends Controller
 
     public function properties() {
 
-        return view("front.properties",
+        return view("front.properties.index",
             [
                 "properties" => Property::where("is_public", true)->latest()->get()->toArray()
             ]);
@@ -44,6 +44,6 @@ class HomeController extends Controller
             return redirect()->back()->with("error", "We are sorry we can't find that property! try another one");
         }
 
-        return view("front.view", ["property" => $property]);
+        return view("front.properties.view", ["property" => $property]);
     }
 }
