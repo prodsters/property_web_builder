@@ -37,7 +37,11 @@
               <div class="box-body">
                 <div class="form-group">
                   <label for="title">Title</label>
-                  <input type="text" max="240" class="form-control" id="title" name="title" placeholder="Example Bungalow" required>
+                  <select class="form-control" name="title">
+                    @foreach($types as $type)
+                    <option value="{{$type->type}}">{{$type->type}}</option>
+                    @endforeach
+                  </select>
                 </div>
                 <div class="form-group">
                   <label for="description">Description</label>
