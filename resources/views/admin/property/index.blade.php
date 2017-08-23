@@ -60,7 +60,7 @@
                       Rent 
                     @endif
                   </td>
-                  <td>{{$property->author}}</td>
+                  <td>{{$property->author->full_name}}</td>
                   <td>{{$property->created_at}}</td>
                   <td>{{$property->reference_no}}</td>
                   <td>
