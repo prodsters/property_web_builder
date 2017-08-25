@@ -23,13 +23,13 @@ class AdminDashboardController extends Controller
         $viewData["userCount"] = User::all()->count();
         $viewData['propertyCount'] = Property::all()->count();
 
-        $chart = Charts::database(Property::all(), 'bar', 'highcharts')
+        $chart = Charts::database(Property::all(), 'bar', 'google')
             ->title(" ")
-            ->elementLabel("Frequency")
+            ->elementLabel("Property Types")
             // A dimension of 0 means it will take 100% of the space
             ->dimensions(0, 400) // Width x Height
             // This defines a preset of colors already done:)
-            ->template("material")
+            // ->template("material")
             // ->y_axis_title('Number of Units')
             ->groupBy('title');
 
