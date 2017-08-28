@@ -20,13 +20,13 @@
     <div class="container">
         @if(count($properties) > 0)
         <div class="w3layouts_header">
-            {{--<p><span><i class="fa fa-building-o" aria-hidden="true"></i></span></p>--}}
             <h5>Available <span>Properties {{$type??""}}</span></h5>
         </div>
         <div class="w3_services_grids">
-                @for($i = 0; $i < count($properties); $i++)
+                @for($i = 0; $i < count($properties);)
                   <div class="row">
-                    @for($j = 0; $j < 3 && $i < count($properties); $j++)
+                  @for($j = 0; $j < 3; $j++)
+                   @if($i >= count($properties)) @break @endif
                    <a href="{{route("front.properties.detail", ["id" => $properties[$i]['id']])}}">
                     <div class="col-md-4 w3l_services_grid">
                         <div class="w3ls_services_grid agileits_services_grid">
@@ -44,14 +44,14 @@
                         </div>
                     </div>
                    </a>
-                    <?php $i++; ?>
-                    @endfor
+                   <?php $i++; ?>
+                  @endfor
                   </div>
                 @endfor
             @else
                 <div class="w3layouts_header">
                     <p><span><i class="fa fa-building-o" aria-hidden="true"></i></span></p>
-                    <h5>No Available <span>Properties</span> {{$type}}.
+                    <h5>No Available <span>Properties</span>.
                         <br><br>
                         <span>Use the Find Button to Search for one</span>
                     </h5>

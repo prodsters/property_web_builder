@@ -14,7 +14,7 @@ Route::group(["namespace" => "Front"], function () {
     Route::get("/properties/type/{type}", "HomeController@propertiesByType")->name("front.properties.type");
     Route::get("/properties/{id}", "HomeController@detail")->name("front.properties.detail");
 
-
+    Route::post("/properties/find", "HomeController@find")->name("front.properties.find");
 
 
 });

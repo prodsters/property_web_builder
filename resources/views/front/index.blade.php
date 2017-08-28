@@ -10,54 +10,35 @@
         </div>
         <div class="clearfix"> </div>
         <div class="w3_banner_bottom_pos">
-            <form action="#" method="post">
+            <form action="{{route('front.properties.find')}}" method="post">
+                {{csrf_field()}}
                 <h2>Find a property</h2>
-                <div class="agile_book_section_top">
-                    <select onchange="change_country(this.value)" required="">
-                        <option value="">Filter By Keywords</option>
-                        <option value="">Property By Id</option>
-                        <option value="">Location</option>
-                        <option value="">Type</option>
-                        <option value="">Status</option>
-                        <option value="">Price</option>
+                <div class="form-group">
+                    <label>Property Type</label>
+                    <select name="type">
+                        <option selected disabled>Any</option>
+                        @foreach($propertyTypes as $pt)
+                            <option value="{{$pt->id}}">{{$pt->type}}</option>
+                        @endforeach
                     </select>
                 </div>
-                <div class="agileits_w3layouts_book_section_single">
-                    <div class="w3_agileits_section_room">
-                        <select onchange="change_country(this.value)" required="">
-                            <option value="">Any Type</option>
-                            <option value="">Single</option>
-                            <option value="">Duplex</option>
-                            <option value="">Retail</option>
-                            <option value="">Multi Family</option>
-                        </select>
-                    </div>
-                    <div class="w3_agileits_section_room">
-                        <select onchange="change_country(this.value)" required="">
-                            <option value="">Any Location</option>
-                            <option value="">Australia</option>
-                            <option value="">Sweden</option>
-                            <option value="">Netherlands</option>
-                            <option value="">Bangkok</option>
-                        </select>
-                    </div>
-                    <div class="clearfix"></div>
+                <div class="form-group">
+                    <label>For Rent/Sale?</label>
+                    <select name="rent_sale" required="">
+                        <option selected disabled>Any</option>
+                        <option value="rent">For Rent Only</option>
+                        <option value="sale">For Sale Only</option>
+                    </select>
                 </div>
-                <div class="bath">
-                    <h4>Bed rooms</h4>
-                    <input type="number" class="text_box" value="3" min="1">
+                <div class="form-group">
+                    <label>Min. Price</label>
+                    <input name="min_price" value="" type="number" placeholder="any">
                 </div>
-                <div class="bath">
-                    <h4>Bath rooms</h4>
-                    <input type="number" class="text_box" value="4" min="1">
+                <div class="form-group">
+                    <label>Max. Price</label>
+                    <input name="max_price" value="" type="number" placeholder="any">
                 </div>
                 <div class="clearfix"></div>
-                <div class="wthree_range_slider">
-                    <h4>Price range</h4>
-                    <div id="slider-range"></div>
-                    <input type="text" id="amount" style="border: 0;" />
-
-                </div>
                 <input type="submit" value="Find properties">
             </form>
         </div>

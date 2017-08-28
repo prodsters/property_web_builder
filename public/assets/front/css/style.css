@@ -363,7 +363,7 @@ a.w3_agile_vimeo:hover{
     margin-bottom: 1em;
     letter-spacing: 2px;
 }
-.w3_banner_bottom_pos select {
+.w3_banner_bottom_pos select, .w3_banner_bottom_pos input {
     color: #212121;
     font-size: 14px;
     padding: 10px;
