@@ -17,16 +17,15 @@
         </div>
     </div>
 </div>
-<div class="services">
+<div class="services" style="padding-top: 0px;">
     <div class="container">
-        <div class="w3layouts_header">
-            <p><span><i class="fa fa-building-o" aria-hidden="true"></i></span></p>
-            <h5>{{$property->title}}</h5>
-        </div>
-        <br>
         <div class="row">
             <div class="col-sm-offset-1 col-sm-6">
-                <p>{{$property->description}}</p>
+                <div class="w3layouts_header" style="text-align: left;">
+                    <h5 style="color: #333333 !important;">{{$property->title}}</h5>
+                    <br>
+                    <span>{{$property->description}}</span>
+                </div>
                 <hr>
                 <p><strong>Location:</strong> {{$property->street_address}}, {{$property->city}}, {{$property->country}}</p>
                 <br>

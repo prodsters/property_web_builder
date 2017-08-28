@@ -16,12 +16,12 @@
     </div>
 
 <!-- properties -->
-<div class="services">
+<div class="services" style="padding-top: 0px;">
     <div class="container">
         @if(count($properties) > 0)
         <div class="w3layouts_header">
-            <p><span><i class="fa fa-building-o" aria-hidden="true"></i></span></p>
-            <h5>Available <span>Properties {{$type}}</span></h5>
+            {{--<p><span><i class="fa fa-building-o" aria-hidden="true"></i></span></p>--}}
+            <h5>Available <span>Properties {{$type??""}}</span></h5>
         </div>
         <div class="w3_services_grids">
                 @for($i = 0; $i < count($properties); $i++)

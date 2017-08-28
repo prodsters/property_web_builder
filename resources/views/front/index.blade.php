@@ -85,7 +85,6 @@
                 </div>
                 <div class="wthree_service_text">
                     <h3>Properties For Rent</h3>
-                    <small>There are 20 properties for rent starting from $300</small>
                     <h4 class="w3_agileits_service">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -110,7 +109,6 @@
                 </div>
                 <div class="wthree_service_text">
                     <h3>Properties for sale</h3>
-                    <small>There are 20 properties for sale starting from $300</small>
                     <h4 class="w3_agileits_service2">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
@@ -127,7 +125,7 @@
             <div class="col-md-4 w3l_services_grid">
                 <div class="w3ls_services_grid agileits_services_grid1">
                     <div class="agile_services_grid1_sub agileits_w3layouts_ser_sub">
-                        <p>$ 45,000</p>
+                        <p>Land</p>
                     </div>
                     <div class="agileinfo_services_grid_pos agile_services_grid_pos">
                         <i class="fa fa-home" aria-hidden="true"></i>
@@ -135,7 +133,6 @@
                 </div>
                 <div class="wthree_service_text">
                     <h3>Lands</h3>
-                    <small>There are 20 pieces of land for sale starting from $700</small>
                     <h4 class="w3_agileits_service1">View All</h4>
                     <ul>
                         <li><i class="fa fa-star" aria-hidden="true"></i></li>
