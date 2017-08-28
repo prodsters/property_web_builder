@@ -52,9 +52,15 @@
                 @foreach($properties as $property)
                 <tr>
                   <td>{{$property->title}}</td>
-                  <td>{{$property->city}},{{$property->country}}</td>
-                  <td>@if($property->sale)Sale @else Rent @endif</td>
-                  <td>{{$property->author}}</td>
+                  <td>{{$property->city}}, {{$property->country}}</td>
+                  <td>
+                    @if($property->sale)
+                      Sale 
+                    @else 
+                      Rent 
+                    @endif
+                  </td>
+                  <td>{{$property->author->full_name}}git</td>
                   <td>{{$property->created_at}}</td>
                   <td>{{$property->reference_no}}</td>
                   <td>
