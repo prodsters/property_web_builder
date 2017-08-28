@@ -15,33 +15,18 @@ class UsersTableSeeder extends Seeder
             "first_name" => "Prodsters",
             "last_name" => "Codulab",
             "email" => "test@test.com",
+            "phone" => "+2347099292929",
             "password" => bcrypt('test123'),
             "profile_pic" => "",
             "is_admin" => true
         ]);
 
-        // DB::table("users")->insert([
-        //     "first_name" => "Seun",
-        //     "last_name" => "Smatt",
-        //     "email" => "test@codulab.com",
-        //     "password" => bcrypt('test123'),
-        //     "profile_pic" => "",
-        //     "is_admin" => false
-        // ]);
-
-        // DB::table("users")->insert([
-        //     "first_name" => "Eig",
-        //     "last_name" => "Aigh",
-        //     "email" => "eig@test.com",
-        //     "password" => bcrypt('test123'),
-        //     "profile_pic" => "",
-        //     "is_admin" => true
-        // ]);
 
         DB::table("users")->insert([
             "first_name" => "Stanley",
             "last_name" => "Eguma",
             "email" => "test@s.eguma.com",
+            "phone" => "+2347099292929",
             "password" => bcrypt('test123'),
             "profile_pic" => "",
             "is_admin" => false
